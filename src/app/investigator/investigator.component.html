@@ -1,0 +1,32 @@
+<div class="sans-serif ba mw5 pa2 ma1">
+  <div>
+    <input type="text" class="mv2 ba b--blue" [(ngModel)]="investigatorName" />
+  </div>
+  <div class="pv2 cf">
+    <span class="v-mid">Mental trauma: {{ mentalTrauma }}</span>
+    <div class="di fr">
+        <button class="f6 link dim ba ph2 pv1 mh1 b--blue" (click)="updateMentalTrauma(-1)">-</button>
+        <button class="f6 link dim ba ph2 pv1 mh1 b--blue" (click)="updateMentalTrauma(+1)">+</button>
+    </div>
+  </div>
+  <div class="pv2 cf">
+    <span class="v-mid">Physical trauma: {{ physicalTrauma }}</span>
+    <div class="di fr">
+        <button class="f6 link dim ba ph2 pv1 mh1 dib b--blue" (click)="updatePhysicalTrauma(-1)">-</button>
+        <button class="f6 link dim ba ph2 pv1 mh1 dib b--blue" (click)="updatePhysicalTrauma(+1)">+</button>
+    </div>
+  </div>
+  <hr/>
+  <div>
+    Notes
+    <input type="text" [(ngModel)]="newNote" />
+    <button class="f6 link dim ba ph1 mh1 mb2 dib b--blue" [disabled]="newNote === ''" (click)="addNote()">+</button>
+  </div>
+  <div>
+    <ul class="list pl0">
+        <li *ngFor="let t of notes; let i = index; let even = even" class="v-mid">
+            <span [ngClass]="{ 'bg-black-10': even }" class="w-100 dib pv1 pl1">{{t}}<button class="f6 link dim ba ph2 pv1 fr mh1 b--blue" (click)="removeNote(i)">-</button></span>
+        </li>
+    </ul>
+  </div>
+</div>
