@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { InvestigatorComponent } from './investigator/investigator.component';
+import { InvestigatorListComponent } from './investigator-list/investigator-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InvestigatorComponent
+    InvestigatorComponent,
+    InvestigatorListComponent
   ],
   imports: [
     BrowserModule,
