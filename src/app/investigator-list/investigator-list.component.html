@@ -1,4 +1,3 @@
 <div class="ma2 flex flex-wrap">
-  <app-investigator></app-investigator>
-  <app-investigator></app-investigator>
+  <app-investigator *ngFor="let investigator of investigators" [investigator]="investigator"></app-investigator>
 </div>

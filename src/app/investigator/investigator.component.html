@@ -1,31 +1,39 @@
-<div class="sans-serif ba mw5 pa2 ma1 br2">
+<div class="sans-serif f6 ba mw5 pa2 ma1 br2">
   <div>
-    <input type="text" class="mv2 ba b--blue br2" [(ngModel)]="investigatorName" />
+    <input type="text" class="mv2 ba b--blue br2" [(ngModel)]="investigator.name" />
   </div>
-  <div class="pv2 cf">
-    <span class="v-mid">Mental trauma: {{ mentalTrauma }}</span>
-    <div class="di fr">
+  <div class="pv2 flex justify-between items-center">
+    <div>Mental trauma: {{ investigator.mentalTrauma }}</div>
+    <div>
         <button class="f6 link dim ba ph2 pv1 mh1 bg-lightest-blue b b--blue br2" (click)="updateMentalTrauma(-1)">-</button>
         <button class="f6 link dim ba ph2 pv1 mh1 bg-lightest-blue b b--blue br2" (click)="updateMentalTrauma(+1)">+</button>
     </div>
   </div>
-  <div class="pv2 cf">
-    <span class="v-mid">Physical trauma: {{ physicalTrauma }}</span>
-    <div class="di fr">
+  <div class="flex justify-between items-center">
+    <div>Physical trauma: {{ investigator.physicalTrauma }}</div>
+    <div>
         <button class="f6 link dim ba ph2 pv1 mh1 bg-lightest-blue b b--blue br2" (click)="updatePhysicalTrauma(-1)">-</button>
         <button class="f6 link dim ba ph2 pv1 mh1 bg-lightest-blue b b--blue br2" (click)="updatePhysicalTrauma(+1)">+</button>
     </div>
   </div>
   <hr/>
   <div>
-    Notes
-    <input type="text" class="ba b--blue br2" [(ngModel)]="newNote" />
-    <button class="f6 link dim ba ph2 pv1 mh1 bg-lightest-blue b b--blue br2" [disabled]="newNote === ''" (click)="addNote()">+</button>
+    <div>
+        Notes
+    </div>
+    <div class="flex items-center">
+      <div><textarea class="w-100" style="resize: none;" rows="2" [(ngModel)]="newNote"></textarea></div>
+      <div><button class="f6 link dim ba ph2 pv1 mh1 bg-lightest-blue b b--blue br2" [disabled]="newNote === ''" (click)="addNote()">+</button></div>
+    </div>
+    <!-- <input type="text" class="ba b--blue br2" [(ngModel)]="newNote" /> -->
   </div>
   <div>
     <ul class="list pl0">
-        <li *ngFor="let t of notes; let i = index; let even = even" class="v-mid">
-            <span [ngClass]="{ 'bg-black-10': even }" class="w-100 dib pv1 pl1">{{t}}<button class="f6 link dim ba ph2 pv1 fr mh1 b--blue" (click)="removeNote(i)">-</button></span>
+        <li *ngFor="let t of investigator.notes; let i = index; let even = even">
+          <div class="flex justify-between items-center pv1 pl1" [ngClass]="{ 'bg-black-10': even }">  
+            <div>{{t}}</div>
+            <div><button class="f6 link dim ba ph2 pv1 mh1 bg-lightest-blue b b--blue br2" (click)="removeNote(i)">-</button></div>
+          </div>
         </li>
     </ul>
   </div>

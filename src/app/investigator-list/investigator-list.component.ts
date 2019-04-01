@@ -11,7 +11,8 @@ export class InvestigatorListComponent implements OnInit {
 
   // TODO: pass this data to the investigator component
   investigators: Investigator[] = [
-    new Investigator('Wendy Adams', 0 , 1)
+    new Investigator('Wendy Adams', 0 , 1, ['nothing of note']),
+    new Investigator('Roland Banks', 1 , 1, ['relic of ages'])
   ];
   constructor() { }
 

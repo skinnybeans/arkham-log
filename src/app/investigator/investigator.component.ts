@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Investigator } from './investigator.model';
 
 @Component({
   selector: 'app-investigator',
@@ -7,10 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InvestigatorComponent implements OnInit {
 
-  investigatorName = 'Wendy Adams';
-  physicalTrauma = 0;
-  mentalTrauma = 0;
-  notes = [];
+  @Input() investigator: Investigator = new Investigator();
+
   newNote = '';
 
   constructor() { }
@@ -19,25 +18,25 @@ export class InvestigatorComponent implements OnInit {
   }
 
   updateMentalTrauma(modifier: number) {
-    this.mentalTrauma += modifier;
-    if (this.mentalTrauma < 0) {
-      this.mentalTrauma = 0;
+    this.investigator.mentalTrauma += modifier;
+    if (this.investigator.mentalTrauma < 0) {
+      this.investigator.mentalTrauma = 0;
     }
   }
 
   updatePhysicalTrauma(modifier: number) {
-    this.physicalTrauma += modifier;
-    if (this.physicalTrauma < 0) {
-      this.physicalTrauma = 0;
+    this.investigator.physicalTrauma += modifier;
+    if (this.investigator.physicalTrauma < 0) {
+      this.investigator.physicalTrauma = 0;
     }
   }
 
   removeNote(index: number) {
-    this.notes.splice(index, 1);
+    this.investigator.notes.splice(index, 1);
   }
 
   addNote() {
-    this.notes.push(this.newNote);
+    this.investigator.notes.push(this.newNote);
     this.newNote = '';
   }
 }
