@@ -9,7 +9,7 @@ export class CampaignPanelComponent implements OnInit {
 
   campaignName: string;
   isInvestigatorsVisible = false;
-  isNotesVisible = false;
+  isProgressVisible = false;
 
   constructor() {
     this.campaignName = 'Night of the Zealot';
@@ -22,8 +22,7 @@ export class CampaignPanelComponent implements OnInit {
     this.isInvestigatorsVisible = !this.isInvestigatorsVisible;
   }
 
-  onToggleNotes() {
-    this.isNotesVisible = !this.isNotesVisible;
+  onToggleProgress() {
+    this.isProgressVisible = !this.isProgressVisible;
   }
-
 }

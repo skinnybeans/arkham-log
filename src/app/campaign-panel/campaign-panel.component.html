@@ -3,10 +3,13 @@
 </div>
 <div class="sans-serif">
   <button class="btn btn-primary ph2 pv1 mh1" (click)="onToggleInvestigators()">Investigators</button>
-  <button class="btn btn-primary ph2 pv1 mh1" (click)="onToggleNotes()">Notes</button>
+  <button class="btn btn-primary ph2 pv1 mh1" (click)="onToggleProgress()">Progress</button>
 </div>
 
 <hr>
 <div [hidden]="!isInvestigatorsVisible">
   <app-investigator-list></app-investigator-list>
 </div>
+<div [hidden]="!isProgressVisible">
+    <app-campaign-progress></app-campaign-progress>
+  </div>

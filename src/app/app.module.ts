@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { InvestigatorComponent } from './investigator/investigator.component';
 import { InvestigatorListComponent } from './investigator-list/investigator-list.component';
 import { CampaignPanelComponent } from './campaign-panel/campaign-panel.component';
+import { CampaignProgressComponent } from './campaign-progress/campaign-progress.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InvestigatorComponent,
     InvestigatorListComponent,
-    CampaignPanelComponent
+    CampaignPanelComponent,
+    CampaignProgressComponent
   ],
   imports: [
     BrowserModule,
