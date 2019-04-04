@@ -1,0 +1,9 @@
+<div class="sans-serif f6 pa2 ma1">
+  <div>campaign name: <input type="text" [(ngModel)]="campaignName"></div>
+</div>
+<div><button (click)="onToggleInvestigators()">Investigators</button><button (click)="onToggleNotes()">Notes</button></div>
+
+<hr>
+<div [hidden]="!isInvestigatorsVisible">
+  <app-investigator-list></app-investigator-list>
+</div>
