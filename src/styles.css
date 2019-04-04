@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+.btn {
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    border-radius: .25rem;
+    font-weight: 700;
+    font-size: .875rem;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.btn-primary {
+    border-color: rgb(53, 126, 221);
+    background-color: rgb(205, 236, 255);
+}
+
+.btn-success {
+    border-color: rgb(25, 169, 116);
+    background-color: rgb(232, 253, 245);
+}
+
+.btn-danger {
+    border-color: rgb(255, 65, 54);
+    background-color: rgb(255, 223, 223);
+}
