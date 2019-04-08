@@ -5,7 +5,13 @@
   </div>
   <div class="f4">Cultists we interrogated</div>
   <div class="f4">Cultists that got away</div>
-  <p>
-    campaign mission progress will go here
-  </p>
+  <hr>
+  <div class="f4">
+    Progress
+  </div>
+  <div *ngFor="let mission of missions">
+    {{mission.name}}
+    <input type="checkbox" [checked]="mission.completed" />
+    XP Obtained: {{mission.experience}}
+  </div>
 </div>
