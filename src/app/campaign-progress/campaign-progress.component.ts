@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CampaignProgressComponent implements OnInit {
 
+  notes: string[] = ['some note about the campaign so far...'];
   constructor() { }
 
   ngOnInit() {

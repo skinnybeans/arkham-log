@@ -1,9 +1,11 @@
-<p>
-  campaign-progress works!
-</p>
-<p>
-  campaign notes will go here
-</p>
-<p>
-  campaign mission progress will go here
-</p>
+<div class="sans-serif f6 ph2">
+  <p>
+    campaign-progress works!
+  </p>
+  <div *ngFor="let note of notes">
+    {{note}}
+  </div>
+  <p>
+    campaign mission progress will go here
+  </p>
+</div>

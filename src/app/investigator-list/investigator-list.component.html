@@ -3,7 +3,7 @@
     <div class="f3 b flex items-center justify-between">
       Investigators
       <button 
-        class="ph2 pv1 mh1 btn btn-success"
+        class="btn btn-success w3 h2"
         (click)="onAddInvestigator()"
         [disabled]="!(investigators.length < 4)">
           Add
@@ -15,7 +15,7 @@
       <div>{{investigator.name}}</div>
       <div>
         <button 
-          class="f6 dim pointer ba ph2 pv1 mh1 bg-lightest-blue b b--blue br2 w3"
+          class="btn btn-primary w3 h2 mh1"
           [innerText]="(id === selectedIndex) ? 'Hide' : 'Show'" 
           (click)="onToggleInvestigator(id, $event)"
           >Show details
@@ -28,8 +28,8 @@
       <app-investigator [investigator]="selectedInvestigator" ></app-investigator>
     </div>
     <div>
-      <button class="f6 dim pointer ba ph2 pv1 mh1 bg-lightest-blue b b--blue br2 w3">Save</button>
-      <button class="f6 dim pointer ba ph2 pv1 mh1 bg-washed-red b b--red br2 w3" (click)="onDeleteInvestigator()">Delete</button>
+      <button class="btn btn-primary h2 mh1 w3">Save</button>
+      <button class="btn btn-primary h2 mh1 w3" (click)="onDeleteInvestigator()">Delete</button>
     </div>
   </div>
 </div>

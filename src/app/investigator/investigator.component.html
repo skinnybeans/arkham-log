@@ -5,15 +5,15 @@
   <div class="pv2 flex justify-between items-center">
     <div>Mental trauma: {{ investigator.mentalTrauma }}</div>
     <div>
-        <button class="f6 dim pointer ba ph2 pv1 mh1 bg-lightest-blue b b--blue br2" (click)="updateMentalTrauma(-1)">-</button>
-        <button class="f6 dim pointer ba ph2 pv1 mh1 bg-lightest-blue b b--blue br2" (click)="updateMentalTrauma(+1)">+</button>
+        <button class="btn btn-primary w2 h2 mh1" (click)="updateMentalTrauma(-1)">-</button>
+        <button class="btn btn-primary w2 h2 mh1" (click)="updateMentalTrauma(+1)">+</button>
     </div>
   </div>
   <div class="flex justify-between items-center">
     <div>Physical trauma: {{ investigator.physicalTrauma }}</div>
     <div>
-        <button class="f6 dim pointer ba ph2 pv1 mh1 bg-lightest-blue b b--blue br2" (click)="updatePhysicalTrauma(-1)">-</button>
-        <button class="f6 dim pointer ba ph2 pv1 mh1 bg-lightest-blue b b--blue br2" (click)="updatePhysicalTrauma(+1)">+</button>
+        <button class="btn btn-primary w2 h2 mh1" (click)="updatePhysicalTrauma(-1)">-</button>
+        <button class="btn btn-primary w2 h2 mh1" (click)="updatePhysicalTrauma(+1)">+</button>
     </div>
   </div>
   <hr/>
@@ -23,7 +23,7 @@
     </div>
     <div class="flex items-center justify-between">
       <div><textarea class="" style="resize: none;" rows="2" [(ngModel)]="newNote"></textarea></div>
-      <div><button class="f6 dim pointer ba ph2 pv1 mh1 bg-lightest-blue b b--blue br2" [disabled]="newNote === ''" (click)="addNote()">+</button></div>
+      <div><button class="btn btn-success w2 h2 mh1" [disabled]="newNote === ''" (click)="addNote()">+</button></div>
     </div>
     <!-- <input type="text" class="ba b--blue br2" [(ngModel)]="newNote" /> -->
   </div>
@@ -32,7 +32,7 @@
         <li *ngFor="let t of investigator.notes; let i = index; let even = even">
           <div class="flex justify-between items-center pv1 pl1" [ngClass]="{ 'bg-black-10': even }">  
             <div>{{t}}</div>
-            <div><button class="f6 dim pointer ba ph2 pv1 mh1 bg-lightest-blue b b--blue br2" (click)="removeNote(i)">-</button></div>
+            <div><button class="btn btn-danger w2 h2 mh1" (click)="removeNote(i)">-</button></div>
           </div>
         </li>
     </ul>
