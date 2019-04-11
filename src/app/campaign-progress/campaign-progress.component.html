@@ -9,9 +9,18 @@
   <div class="f4">
     Progress
   </div>
-  <div *ngFor="let mission of missions">
-    {{mission.name}}
-    <input type="checkbox" [checked]="mission.completed" />
-    XP Obtained: {{mission.experience}}
+  <div>
+    <table class="collapse ba br2">
+      <tr class="striped--near-white">
+        <th class="pv2 ph3">Mission</th>
+        <th class="pv2 ph3">Completed</th>
+        <th class="pv2 ph3">Experience</th>
+      </tr>
+      <tr class="striped--near-white" *ngFor="let mission of missions">
+        <td class="pv2 ph3">{{ mission.name }}</td>
+        <td class="pv2 ph3"><input type="checkbox" [checked]="mission.completed" /></td>
+        <td class="pv2 ph3">{{ mission.experience }}</td>
+      </tr>
+    </table>
   </div>
 </div>
