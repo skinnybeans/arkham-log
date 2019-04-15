@@ -2,7 +2,16 @@
   <div class="ba pa2 ma1 br2">
     <div class="flex justify-between">
       <div class="f4">General notes</div>
-      <div><button class="btn btn-success h2 w3">Add</button></div>
+      <div>
+        <input 
+          class="mr1 h2"
+          type="text" 
+          [(ngModel)]="note">
+        <button 
+          class="btn btn-success h2 w3"
+          [disabled]="note === ''"
+          (click)="onAddNote()">Add</button>
+      </div>
     </div>
     <ul class="list ml0 pl0">
       <li 
@@ -11,7 +20,9 @@
           class="flex justify-between items-center pv1 pl1"
           [ngClass]="{'bg-near-white': i % 2}">
           <div>{{note}}</div>
-          <div><button class="btn btn-danger w2 h2">-</button></div>
+          <button
+            class="btn btn-danger w2 h2"
+            (click)="onRemoveNote(i)">-</button>
         </div>
       </li>
     </ul>
@@ -37,7 +48,7 @@
           <tr class="striped--near-white" *ngFor="let mission of missions">
             <td class="pv2 ph3">{{ mission.name }}</td>
             <td class="pv2 ph3 tc"><input type="checkbox" [checked]="mission.completed" /></td>
-            <td class="pv2 ph3 tc">{{ mission.experience }}</td>
+            <td class="pv2 ph3 tc"><input type="text" class="w2 tc" value="{{ mission.experience }}"></td>
           </tr>
         </table>
       </div>
