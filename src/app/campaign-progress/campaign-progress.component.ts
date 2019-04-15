@@ -10,7 +10,7 @@ import { Mission } from './mission.model';
 export class CampaignProgressComponent implements OnInit {
 
   // Going to need something for campaign specific notes
-  notes: string[] = ['some note about the campaign so far...'];
+  notes: string[] = ['some note about the campaign so far...', 'and another note'];
   missions: Mission[] = [
     {name: 'mission 2', completed: false, experience: 0, sequence: 2},
     {name: 'mission 1', completed: true, experience: 0, sequence: 1},

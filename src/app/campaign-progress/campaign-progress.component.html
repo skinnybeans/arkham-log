@@ -1,26 +1,45 @@
-<div class="sans-serif f6 ph2">
-  <div class="f4">General notes</div>
-  <div *ngFor="let note of notes">
-    {{note}}
+<div class="sans-serif f6 ph2 mw6">
+  <div class="ba pa2 ma1 br2">
+    <div class="flex justify-between">
+      <div class="f4">General notes</div>
+      <div><button class="btn btn-success h2 w3">Add</button></div>
+    </div>
+    <ul class="list ml0 pl0">
+      <li 
+        *ngFor="let note of notes; let i = index">
+        <div 
+          class="flex justify-between items-center pv1 pl1"
+          [ngClass]="{'bg-near-white': i % 2}">
+          <div>{{note}}</div>
+          <div><button class="btn btn-danger w2 h2">-</button></div>
+        </div>
+      </li>
+    </ul>
   </div>
-  <div class="f4">Cultists we interrogated</div>
-  <div class="f4">Cultists that got away</div>
-  <hr>
-  <div class="f4">
-    Progress
+  <div class="ba pa2 ma1 br2">
+      <div class="f4">Cultists we interrogated</div>
+      <div>None</div>
   </div>
-  <div>
-    <table class="collapse ba br2">
-      <tr class="striped--near-white">
-        <th class="pv2 ph3">Mission</th>
-        <th class="pv2 ph3">Completed</th>
-        <th class="pv2 ph3">Experience</th>
-      </tr>
-      <tr class="striped--near-white" *ngFor="let mission of missions">
-        <td class="pv2 ph3">{{ mission.name }}</td>
-        <td class="pv2 ph3"><input type="checkbox" [checked]="mission.completed" /></td>
-        <td class="pv2 ph3">{{ mission.experience }}</td>
-      </tr>
-    </table>
+
+  <div class="ba pa2 ma1 br2">
+      <div class="f4">Cultists that got away</div>
+      <div>None</div>
+  </div>
+  <div class="ba pa2 ma1 br2">
+    <div class="f4 mb1">Progress</div>
+    <div>
+        <table class="collapse w-100">
+          <tr class="striped--near-white">
+            <th class="pv2 ph3">Mission</th>
+            <th class="pv2 ph3">Completed</th>
+            <th class="pv2 ph3">Experience</th>
+          </tr>
+          <tr class="striped--near-white" *ngFor="let mission of missions">
+            <td class="pv2 ph3">{{ mission.name }}</td>
+            <td class="pv2 ph3 tc"><input type="checkbox" [checked]="mission.completed" /></td>
+            <td class="pv2 ph3 tc">{{ mission.experience }}</td>
+          </tr>
+        </table>
+      </div>
   </div>
 </div>
