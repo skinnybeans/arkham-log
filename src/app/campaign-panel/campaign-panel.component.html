@@ -1,14 +1,15 @@
-<div class="sans-serif f6 pa2 ma1">
-  <div>campaign name: <input type="text" [(ngModel)]="campaignName"></div>
-</div>
-<div class="sans-serif">
-  <button class="btn btn-primary h2 mh1" (click)="onToggleInvestigators()">Investigators</button>
-  <button class="btn btn-primary h2 mh1" (click)="onToggleProgress()">Progress</button>
-</div>
-<hr>
-<div [hidden]="!isInvestigatorsVisible">
-  <app-investigator-list></app-investigator-list>
-</div>
-<div [hidden]="!isProgressVisible">
-    <app-campaign-progress></app-campaign-progress>
+<div class="flex justify-center sans-serif w-100">
+  <div>
+    <div>campaign name: <input type="text" [(ngModel)]="campaignName"></div>
+    <div class="flex justify-center sans-serif w-100 sans-serif">
+      <button class="btn btn-primary h2 mh1" (click)="onToggleInvestigators()">Investigators</button>
+      <button class="btn btn-primary h2 mh1" (click)="onToggleProgress()">Progress</button>
+    </div>
+    <div [hidden]="!isInvestigatorsVisible">
+      <app-investigator-list></app-investigator-list>
+    </div>
+    <div [hidden]="!isProgressVisible">
+        <app-campaign-progress></app-campaign-progress>
+    </div>
+  </div>
 </div>
