@@ -1,4 +1,4 @@
-<div class="sans-serif f6 ba pa2 ma1 br2 mw6">
+<div class="sans-serif f6 mw6">
   <div>
     <input type="text" class="mv2 ba pa1 b--blue br2 w-100" [(ngModel)]="investigator.name" />
   </div>
@@ -22,19 +22,17 @@
         Notes
     </div>
     <div class="flex items-center justify-between">
-      <div><textarea class="" style="resize: none;" rows="2" [(ngModel)]="newNote"></textarea></div>
-      <div><button class="btn btn-success w2 h2 mh1" [disabled]="newNote === ''" (click)="addNote()">+</button></div>
+      <input type="text" class="w-75 h2" [(ngModel)]="newNote">
+      <button class="btn btn-success w2 h2 mh1" [disabled]="newNote === ''" (click)="addNote()">+</button>
     </div>
     <!-- <input type="text" class="ba b--blue br2" [(ngModel)]="newNote" /> -->
   </div>
-  <div>
-    <ul class="list pl0">
-        <li *ngFor="let t of investigator.notes; let i = index; let even = even">
-          <div class="flex justify-between items-center pv1 pl1" [ngClass]="{ 'bg-black-10': even }">  
-            <div>{{t}}</div>
-            <div><button class="btn btn-danger w2 h2 mh1" (click)="removeNote(i)">-</button></div>
-          </div>
-        </li>
-    </ul>
+  <div class="mw6">
+    <div *ngFor="let t of investigator.notes; let i = index; let even = even">
+      <div class="flex justify-between items-center pv1 pl1" [ngClass]="{ 'bg-black-10': even }">  
+          <div class="w-75">{{t}}</div>
+          <button class="btn btn-danger w2 h2 mh1" (click)="removeNote(i)">-</button>
+        </div>      
+    </div>
   </div>
 </div>

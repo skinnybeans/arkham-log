@@ -1,5 +1,5 @@
 <div class="flex flex-wrap sans-serif f6 mw6 ba br2">
-  <div class="f4 flex items-center justify-between w-100">
+   <div class="f4 flex items-center justify-between w-100 mh2">
     <p>Investigators</p>
     <button 
       class="btn btn-success w3 h2"
@@ -8,24 +8,30 @@
         Add
     </button>
   </div>
-  <div class="flex items-center justify-between ma2" *ngFor="let investigator of investigators;let id = index">
-    <div>{{investigator.name}}</div>
-    <div>
-      <button 
-        class="btn btn-primary w3 h2 mh1"
-        [innerText]="(id === selectedIndex) ? 'Hide' : 'Show'" 
-        (click)="onToggleInvestigator(id, $event)"
-        >Show details
-    </button>
-    </div>
-  </div>
+  <ul class="list pl0 w-100">
+    <li 
+      class="flex items-center justify-between ma2" 
+      *ngFor="let investigator of investigators;let id = index">
+      <div>{{investigator.name}}</div>
+      <div>
+        <button 
+          class="btn btn-primary w3 h2 mh1"
+          [innerText]="(id === selectedIndex) ? 'Hide' : 'Show'" 
+          (click)="onToggleInvestigator(id, $event)"
+          >Show details
+      </button>
+      </div>
+    </li>
+  </ul>
 </div>
-<div *ngIf="selectedInvestigator !== undefined">
+<div 
+  *ngIf="selectedInvestigator !== undefined"
+  class="ba br2 pa2">
   <div>
     <app-investigator [investigator]="selectedInvestigator" ></app-investigator>
   </div>
   <div>
-    <button class="btn btn-primary h2 mh1 w3">Save</button>
-    <button class="btn btn-primary h2 mh1 w3" (click)="onDeleteInvestigator()">Delete</button>
+    <button class="btn btn-success h2 mh1 w3">Save</button>
+    <button class="btn btn-danger h2 mh1 w3" (click)="onDeleteInvestigator()">Delete</button>
   </div>
 </div>
