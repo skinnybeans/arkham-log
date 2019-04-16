@@ -1,6 +1,7 @@
 <div class="sans-serif f6 mw6">
-  <div>
-    <input type="text" class="mv2 ba pa1 b--blue br2 w-100" [(ngModel)]="investigator.name" />
+  <div class="flex justify-between items-center">
+    <div class="b">Name:</div>
+    <input type="text" class="mv2 h2 ba pa1 b--blue br2 w-75" [(ngModel)]="investigator.name" />
   </div>
   <div class="pv2 flex justify-between items-center">
     <div>Mental trauma: {{ investigator.mentalTrauma }}</div>
@@ -18,21 +19,21 @@
   </div>
   <hr/>
   <div>
-    <div>
+    <div class="b mv2">
         Notes
     </div>
-    <div class="flex items-center justify-between">
-      <input type="text" class="w-75 h2" [(ngModel)]="newNote">
+    <div class="flex items-center justify-between mb2">
+      <input type="text" class="w-75 h2 ba b--blue br2" [(ngModel)]="newNote">
       <button class="btn btn-success w2 h2 mh1" [disabled]="newNote === ''" (click)="addNote()">+</button>
     </div>
     <!-- <input type="text" class="ba b--blue br2" [(ngModel)]="newNote" /> -->
   </div>
-  <div class="mw6">
-    <div *ngFor="let t of investigator.notes; let i = index; let even = even">
-      <div class="flex justify-between items-center pv1 pl1" [ngClass]="{ 'bg-black-10': even }">  
-          <div class="w-75">{{t}}</div>
-          <button class="btn btn-danger w2 h2 mh1" (click)="removeNote(i)">-</button>
-        </div>      
-    </div>
+  <div *ngFor="let t of investigator.notes; let i = index; let even = even"
+   class="mv1 ba br2 b--moon-gray">
+    <div class="flex justify-between items-center pv1 pl1" [ngClass]="{ 'bg-near-white': even }">  
+        <div class="mw5">{{t}}</div>
+        <button class="btn btn-danger w2 h2 mh1" (click)="removeNote(i)">-</button>
+      </div>      
   </div>
+  <hr>
 </div>
