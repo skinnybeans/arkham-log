@@ -1,17 +1,17 @@
-<div class="flex flex-wrap ma2 sans-serif f6 mw-100">
-  <div class="w5">
-    <div class="f3 b flex items-center justify-between">
-      Investigators
-      <button 
-        class="btn btn-success w3 h2"
-        (click)="onAddInvestigator()"
-        [disabled]="!(investigators.length < 4)">
-          Add
-      </button>
-    </div>
-    <hr>
-    <!-- <app-investigator *ngFor="let investigator of investigators" [investigator]="investigator"></app-investigator> -->
-    <div class="flex items-center justify-between ma2" *ngFor="let investigator of investigators;let id = index">
+<div class="flex flex-wrap sans-serif f6 mw6 ba br2">
+   <div class="f4 flex items-center justify-between w-100 mh2">
+    <p>Investigators</p>
+    <button 
+      class="btn btn-success w3 h2"
+      (click)="onAddInvestigator()"
+      [disabled]="!(investigators.length < 4)">
+        Add
+    </button>
+  </div>
+  <ul class="list pl0 w-100">
+    <li 
+      class="flex items-center justify-between ma2" 
+      *ngFor="let investigator of investigators;let id = index">
       <div>{{investigator.name}}</div>
       <div>
         <button 
@@ -21,15 +21,17 @@
           >Show details
       </button>
       </div>
-    </div>
+    </li>
+  </ul>
+</div>
+<div 
+  *ngIf="selectedInvestigator !== undefined"
+  class="ba br2 pa2">
+  <div>
+    <app-investigator [investigator]="selectedInvestigator" ></app-investigator>
   </div>
-  <div *ngIf="selectedInvestigator !== undefined">
-    <div>
-      <app-investigator [investigator]="selectedInvestigator" ></app-investigator>
-    </div>
-    <div>
-      <button class="btn btn-primary h2 mh1 w3">Save</button>
-      <button class="btn btn-primary h2 mh1 w3" (click)="onDeleteInvestigator()">Delete</button>
-    </div>
+  <div>
+    <button class="btn btn-success h2 mh1 w3">Save</button>
+    <button class="btn btn-danger h2 mh1 w3" (click)="onDeleteInvestigator()">Delete</button>
   </div>
 </div>
