@@ -4,7 +4,7 @@
       <div class="f4">General notes</div>
       <div>
         <input 
-          class="mr1 h2"
+          class="mr1 h2 b--blue br2"
           type="text" 
           [(ngModel)]="note">
         <button 
@@ -19,7 +19,7 @@
         <div 
           class="flex justify-between items-center pv1 pl1"
           [ngClass]="{'bg-near-white': i % 2}">
-          <div>{{note}}</div>
+          <div class="w-80">{{note}}</div>
           <button
             class="btn btn-danger w2 h2"
             (click)="onRemoveNote(i)">-</button>

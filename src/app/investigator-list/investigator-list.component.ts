@@ -11,7 +11,7 @@ import { Investigator } from '../investigator/investigator.model';
 export class InvestigatorListComponent implements OnInit {
 
   investigators: Investigator[] = [
-    new Investigator('Wendy Adams', 0 , 1, ['nothing of note here is a long note to test line wrapping']),
+    new Investigator('Wendy Adams testing the wrapping of long names', 0 , 1, ['nothing of note here is a long note to test line wrapping']),
     new Investigator('Roland Banks', 1 , 1, ['relic of ages'])
   ];
 

@@ -31,7 +31,7 @@
   <div *ngFor="let t of investigator.notes; let i = index; let even = even"
    class="mv1 ba br2 b--moon-gray">
     <div class="flex justify-between items-center pv1 pl1" [ngClass]="{ 'bg-near-white': even }">  
-        <div class="mw5">{{t}}</div>
+        <div class="w-75">{{t}}</div>
         <button class="btn btn-danger w2 h2 mh1" (click)="removeNote(i)">-</button>
       </div>      
   </div>
