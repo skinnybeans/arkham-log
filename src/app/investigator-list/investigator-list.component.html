@@ -28,7 +28,7 @@
   *ngIf="selectedInvestigator !== undefined"
   class="ba br2 pa2">
   <div>
-    <app-investigator [investigator]="selectedInvestigator" ></app-investigator>
+    <app-investigator [investigator]="selectedInvestigator" [investigatorId]="selectedIndex" ></app-investigator>
   </div>
   <div>
     <button class="btn btn-success h2 mh1 w3">Save</button>
