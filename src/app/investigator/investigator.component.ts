@@ -33,5 +33,6 @@ export class InvestigatorComponent implements OnInit {
 
   addNote() {
     this.investigatorService.addNote(this.investigatorId, this.newNote);
+    this.newNote = '';
   }
 }
