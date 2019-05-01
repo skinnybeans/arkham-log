@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Investigator } from '../investigator/investigator.model';
+import { InvestigatorService } from '../investigator.service';
 
 
 @Component({
@@ -10,19 +11,17 @@ import { Investigator } from '../investigator/investigator.model';
 })
 export class InvestigatorListComponent implements OnInit {
 
-  investigators: Investigator[] = [
-    new Investigator('Wendy Adams testing the wrapping of long names', 0 , 1, ['nothing of note here is a long note to test line wrapping']),
-    new Investigator('Roland Banks', 1 , 1, ['relic of ages'])
-  ];
+  investigators: Investigator[];
 
   readonly maxInvestigators = 4;
 
   selectedInvestigator: Investigator;
   selectedIndex: number = undefined;
 
-  constructor() { }
+  constructor(private investigatorService: InvestigatorService) { }
 
   ngOnInit() {
+    this.investigators = this.investigatorService.investigators;
   }
 
   onToggleInvestigator(id: number, event: any) {
@@ -37,14 +36,14 @@ export class InvestigatorListComponent implements OnInit {
 
   onDeleteInvestigator() {
     if (this.selectedIndex !== undefined) {
-      this.investigators.splice(this.selectedIndex, 1);
+      this.investigatorService.deleteInvestigator(this.selectedIndex);
       this.selectedInvestigator = undefined;
       this.selectedIndex = undefined;
     }
   }
 
   onAddInvestigator() {
-    this.investigators.push(new Investigator('New Investigator'));
+    this.investigatorService.addInvestigator();
     this.selectedIndex = this.investigators.length - 1;
     this.selectedInvestigator = this.investigators[this.selectedIndex];
   }

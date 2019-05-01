@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Investigator } from './investigator.model';
+import { InvestigatorService } from '../investigator.service';
 
 @Component({
   selector: 'app-investigator',
@@ -9,34 +10,28 @@ import { Investigator } from './investigator.model';
 export class InvestigatorComponent implements OnInit {
 
   @Input() investigator: Investigator = new Investigator();
+  @Input() investigatorId: number;
 
   newNote = '';
 
-  constructor() { }
+  constructor(private investigatorService: InvestigatorService) { }
 
   ngOnInit() {
   }
 
   updateMentalTrauma(modifier: number) {
-    this.investigator.mentalTrauma += modifier;
-    if (this.investigator.mentalTrauma < 0) {
-      this.investigator.mentalTrauma = 0;
-    }
+    this.investigatorService.updateMentalTrauma(this.investigatorId, modifier);
   }
 
   updatePhysicalTrauma(modifier: number) {
-    this.investigator.physicalTrauma += modifier;
-    if (this.investigator.physicalTrauma < 0) {
-      this.investigator.physicalTrauma = 0;
-    }
+    this.investigatorService.updatePhysicalTrauma(this.investigatorId, modifier);
   }
 
   removeNote(index: number) {
-    this.investigator.notes.splice(index, 1);
+    this.investigatorService.removeNote(this.investigatorId, index);
   }
 
   addNote() {
-    this.investigator.notes.push(this.newNote);
-    this.newNote = '';
+    this.investigatorService.addNote(this.investigatorId, this.newNote);
   }
 }
