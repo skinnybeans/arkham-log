@@ -1,32 +1,5 @@
 <div class="sans-serif f6 mw6">
-  <div class="ba pa2 br2">
-    <div class="flex justify-between">
-      <div class="f4">General notes</div>
-      <div>
-        <input 
-          class="mr1 h2 b--blue br2 ba"
-          type="text" 
-          [(ngModel)]="note">
-        <button 
-          class="btn btn-success h2 w3"
-          [disabled]="note === ''"
-          (click)="onAddNote()">Add</button>
-      </div>
-    </div>
-    <ul class="list ml0 pl0">
-      <li 
-        *ngFor="let note of notes; let i = index">
-        <div 
-          class="flex justify-between items-center pv1 pl1"
-          [ngClass]="{'bg-near-white': i % 2}">
-          <div class="w-80">{{note}}</div>
-          <button
-            class="btn btn-danger w2 h2"
-            (click)="onRemoveNote(i)">-</button>
-        </div>
-      </li>
-    </ul>
-  </div>
+  <app-campaign-notes></app-campaign-notes>
   <div class="ba pa2 br2">
       <div class="f4">Cultists we interrogated</div>
       <div>None</div>
