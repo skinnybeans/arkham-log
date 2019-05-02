@@ -8,6 +8,7 @@ import { InvestigatorListComponent } from './investigator-list/investigator-list
 import { CampaignPanelComponent } from './campaign/campaign-panel/campaign-panel.component';
 import { CampaignProgressComponent } from './campaign/campaign-progress/campaign-progress.component';
 import { CampaignNotesComponent } from './campaign/campaign-progress/campaign-notes/campaign-notes.component';
+import { MissionsComponent } from './campaign/campaign-progress/missions/missions.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { CampaignNotesComponent } from './campaign/campaign-progress/campaign-no
     InvestigatorListComponent,
     CampaignPanelComponent,
     CampaignProgressComponent,
-    CampaignNotesComponent
+    CampaignNotesComponent,
+    MissionsComponent
   ],
   imports: [
     BrowserModule,

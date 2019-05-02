@@ -9,21 +9,5 @@
       <div class="f4">Cultists that got away</div>
       <div>None</div>
   </div>
-  <div class="ba pa2 br2">
-    <div class="f4 mb1">Progress</div>
-    <div>
-        <table class="collapse w-100">
-          <tr class="striped--near-white">
-            <th class="pv2 ph3">Mission</th>
-            <th class="pv2 ph3">Completed</th>
-            <th class="pv2 ph3">Experience</th>
-          </tr>
-          <tr class="striped--near-white" *ngFor="let mission of missions">
-            <td class="pv2 ph3">{{ mission.name }}</td>
-            <td class="pv2 ph3 tc"><input type="checkbox" [checked]="mission.completed" /></td>
-            <td class="pv2 ph3 tc"><input type="text" class="w2 tc" value="{{ mission.experience }}"></td>
-          </tr>
-        </table>
-      </div>
-  </div>
+  <app-missions></app-missions>
 </div>
