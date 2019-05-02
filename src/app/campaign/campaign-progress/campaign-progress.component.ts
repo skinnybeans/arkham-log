@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Mission } from './mission.model';
 import { CampaignProgressService } from './campaign-progress.service';
 
 @Component({

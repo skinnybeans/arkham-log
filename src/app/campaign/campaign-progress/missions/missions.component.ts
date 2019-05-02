@@ -17,4 +17,8 @@ export class MissionsComponent implements OnInit {
   ngOnInit() {
     this.missions = this.campaignProgressService.getMissions();
   }
+
+  onStatusChanged(id: number, event: MouseEvent) {
+    this.campaignProgressService.updateMissionProgress(id, event.currentTarget.checked);
+  }
 }
