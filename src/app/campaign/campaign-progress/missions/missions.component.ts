@@ -19,6 +19,7 @@ export class MissionsComponent implements OnInit {
   }
 
   onStatusChanged(id: number, event: MouseEvent) {
-    this.campaignProgressService.updateMissionProgress(id, event.currentTarget.checked);
+    const element = event.target as HTMLInputElement;
+    this.campaignProgressService.updateMissionProgress(id, element.checked);
   }
 }
