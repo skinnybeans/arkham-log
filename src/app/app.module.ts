@@ -9,6 +9,7 @@ import { CampaignPanelComponent } from './campaign/campaign-panel/campaign-panel
 import { CampaignProgressComponent } from './campaign/campaign-progress/campaign-progress.component';
 import { CampaignNotesComponent } from './campaign/campaign-progress/campaign-notes/campaign-notes.component';
 import { MissionsComponent } from './campaign/campaign-progress/missions/missions.component';
+import { ZealotProgressComponent } from './campaign/campaign-progress/zealot-progress/zealot-progress.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MissionsComponent } from './campaign/campaign-progress/missions/mission
     CampaignPanelComponent,
     CampaignProgressComponent,
     CampaignNotesComponent,
-    MissionsComponent
+    MissionsComponent,
+    ZealotProgressComponent
   ],
   imports: [
     BrowserModule,

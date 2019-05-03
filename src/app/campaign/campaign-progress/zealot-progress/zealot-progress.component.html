@@ -1,0 +1,57 @@
+<div class="ba pa2 br2 mv1">
+  <div class="flex justify-between">
+    <div class="f4">Cultists we interrogated</div>
+    <div>
+        <input 
+          class="mr1 h2 b--blue br2 ba"
+          type="text" 
+          [(ngModel)]="interrogated">
+        <button 
+          class="btn btn-success h2 w3"
+          [disabled]="interrogated === ''"
+          (click)="onAddInterrogated()">Add</button>
+    </div>
+  </div>
+  <ul class="list ml0 pl0">
+    <li 
+      *ngFor="let cultist of interrogatedList; let i = index">
+      <div 
+        class="flex justify-between items-center pv1 pl1"
+        [ngClass]="{'bg-near-white': i % 2}">
+        <div class="w-80">{{cultist}}</div>
+        <button
+          class="btn btn-danger w2 h2"
+          (click)="onRemoveInterrogated(i)">-</button>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="ba pa2 br2 mv1">
+  <div class="flex justify-between">
+    <div class="f4">Cultists that got away</div>
+    <div>
+        <input 
+          class="mr1 h2 b--blue br2 ba"
+          type="text" 
+          [(ngModel)]="escaped">
+        <button 
+          class="btn btn-success h2 w3"
+          [disabled]="escaped === ''"
+          (click)="onAddEscaped()">Add</button>
+    </div>
+  </div>
+  <ul class="list ml0 pl0">
+      <li 
+        *ngFor="let cultist of escapedList; let i = index">
+        <div 
+          class="flex justify-between items-center pv1 pl1"
+          [ngClass]="{'bg-near-white': i % 2}">
+          <div class="w-80">{{cultist}}</div>
+          <button
+            class="btn btn-danger w2 h2"
+            (click)="onRemoveEscaped(i)">-</button>
+        </div>
+      </li>
+    </ul>
+</div>
