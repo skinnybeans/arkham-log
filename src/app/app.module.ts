@@ -10,6 +10,8 @@ import { CampaignProgressComponent } from './campaign/campaign-progress/campaign
 import { CampaignNotesComponent } from './campaign/campaign-progress/campaign-notes/campaign-notes.component';
 import { MissionsComponent } from './campaign/campaign-progress/missions/missions.component';
 import { ZealotProgressComponent } from './campaign/campaign-progress/zealot-progress/zealot-progress.component';
+import { HeaderComponent } from './header/header.component';
+import { CampaignListComponent } from './campaign/campaign-list/campaign-list.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { ZealotProgressComponent } from './campaign/campaign-progress/zealot-pro
     CampaignProgressComponent,
     CampaignNotesComponent,
     MissionsComponent,
-    ZealotProgressComponent
+    ZealotProgressComponent,
+    HeaderComponent,
+    CampaignListComponent
   ],
   imports: [
     BrowserModule,

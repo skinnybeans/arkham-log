@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class CampaignPanelComponent implements OnInit {
 
   campaignName: string;
-  isInvestigatorsVisible = false;
+  isInvestigatorsVisible = true;
   isProgressVisible = false;
 
   constructor() {
@@ -19,10 +19,12 @@ export class CampaignPanelComponent implements OnInit {
   }
 
   onToggleInvestigators() {
-    this.isInvestigatorsVisible = !this.isInvestigatorsVisible;
+    this.isInvestigatorsVisible = true;
+    this.isProgressVisible = false;
   }
 
   onToggleProgress() {
-    this.isProgressVisible = !this.isProgressVisible;
+    this.isProgressVisible = true;
+    this.isInvestigatorsVisible = false;
   }
 }
