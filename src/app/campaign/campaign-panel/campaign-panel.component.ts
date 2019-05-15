@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CampaignService } from '../campaign.service';
+import { Campaign } from '../campaign.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-campaign-panel',
@@ -7,11 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CampaignPanelComponent implements OnInit {
 
+  campaign: Campaign;
   campaignName: string;
   isInvestigatorsVisible = true;
   isProgressVisible = false;
 
-  constructor() {
+  constructor(
+    private campaignService: CampaignService,
+    private route: ActivatedRoute
+  ) {
+    this.campaign = this.campaignService.getCampaign(+this.route.snapshot.url[this.route.snapshot.url.length - 1].path);
     this.campaignName = 'Night of the Zealot';
    }
 
