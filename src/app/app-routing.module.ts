@@ -1,14 +1,20 @@
 import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
 
 import { CampaignListComponent } from './campaign/campaign-list/campaign-list.component';
 import { CampaignPanelComponent } from './campaign/campaign-panel/campaign-panel.component';
-import { NgModule } from '@angular/core';
+import { InvestigatorListComponent } from './investigator-list/investigator-list.component';
+import { CampaignProgressComponent } from './campaign/campaign-progress/campaign-progress.component';
 
 
 const appRoutes: Routes = [
-    { path: '', component: CampaignListComponent },
-    { path: 'campaign', component: CampaignListComponent },
-    { path: 'campaign/:id', component: CampaignPanelComponent}
+    { path: 'campaigns', component: CampaignListComponent },
+    { path: '', redirectTo: '/campaigns', pathMatch: 'full' },
+    { path: 'campaign/:id', component: CampaignPanelComponent, children: [
+        {path: 'investigators', component: InvestigatorListComponent},
+        {path: 'progress', component: CampaignProgressComponent}
+    ]},
+    { path: '**', redirectTo: '/campaigns' }
 ];
 
 @NgModule({

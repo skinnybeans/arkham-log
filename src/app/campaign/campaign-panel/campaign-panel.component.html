@@ -5,13 +5,8 @@
     <input type="text" class="h2 b--blue br2 ba w-60" [(ngModel)]="campaign.name"></div>
     <p>Campaign type: {{campaign.campaignType}}</p>
   <div class="flex justify-center sans-serif w-100 sans-serif">
-    <button class="btn btn-primary h2 mh1" (click)="onToggleInvestigators()">Investigators</button>
-    <button class="btn btn-primary h2 mh1" (click)="onToggleProgress()">Progress</button>
+    <button class="btn btn-primary h2 mh1" (click)="onShowInvestigators()">Investigators</button>
+    <button class="btn btn-primary h2 mh1" (click)="onShowProgress()">Progress</button>
   </div>
-  <div [hidden]="!isInvestigatorsVisible">
-    <app-investigator-list></app-investigator-list>
-  </div>
-  <div [hidden]="!isProgressVisible">
-      <app-campaign-progress></app-campaign-progress>
-  </div>
+  <router-outlet></router-outlet>
 </div>
