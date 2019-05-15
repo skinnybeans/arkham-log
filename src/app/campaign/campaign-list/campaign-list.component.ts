@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Campaign, CampaignType } from '../campaign.model';
+import { Router } from '@angular/router';
+import { CampaignService } from '../campaign.service';
 
 @Component({
   selector: 'app-campaign-list',
@@ -8,13 +10,22 @@ import { Campaign, CampaignType } from '../campaign.model';
 })
 export class CampaignListComponent implements OnInit {
 
-  campaigns: Campaign[] = [
-    { campaignType: CampaignType.NightOfZealot , name: 'my first zealot' },
-    { campaignType: CampaignType.Dunwitch , name: 'another dunwitch' },
-    ];
-
-  constructor() { }
+  campaigns: Campaign [];
+  constructor(
+    private router: Router,
+    private campaignService: CampaignService) { }
 
   ngOnInit() {
+    this.campaigns = this.campaignService.getCampaigns();
+
+    this.campaignService.campaignsChanged.subscribe(
+      (campaigns: Campaign[]) => {
+        this.campaigns = campaigns;
+      }
+    );
+  }
+
+  onShow(id: number) {
+    this.router.navigate(['/campaign', id]);
   }
 }

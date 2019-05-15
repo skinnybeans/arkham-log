@@ -12,6 +12,7 @@ import { MissionsComponent } from './campaign/campaign-progress/missions/mission
 import { ZealotProgressComponent } from './campaign/campaign-progress/zealot-progress/zealot-progress.component';
 import { HeaderComponent } from './header/header.component';
 import { CampaignListComponent } from './campaign/campaign-list/campaign-list.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CampaignListComponent } from './campaign/campaign-list/campaign-list.co
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
