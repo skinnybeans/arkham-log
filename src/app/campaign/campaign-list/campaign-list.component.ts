@@ -24,8 +24,4 @@ export class CampaignListComponent implements OnInit {
       }
     );
   }
-
-  onShow(id: number) {
-    this.router.navigate(['/campaign', id]);
-  }
 }

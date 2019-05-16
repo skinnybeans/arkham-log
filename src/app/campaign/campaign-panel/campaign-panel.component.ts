@@ -1,7 +1,8 @@
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+
 import { CampaignService } from '../campaign.service';
 import { Campaign } from '../campaign.model';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-campaign-panel',
@@ -20,18 +21,16 @@ export class CampaignPanelComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.campaign = this.campaignService.getCampaign(+this.route.snapshot.url[this.route.snapshot.url.length - 1].path);
-    this.campaignName = 'Night of the Zealot';
-   }
+
+  }
 
   ngOnInit() {
-  }
+    this.campaign = this.campaignService.getCampaign(+this.route.snapshot.params['id']);
 
-  onShowInvestigators() {
-    this.router.navigate(['investigators'], { relativeTo: this.route });
-  }
-
-  onShowProgress() {
-    this.router.navigate(['progress'], { relativeTo: this.route });
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.campaign = this.campaignService.getCampaign(params['id']);
+      }
+    );
   }
 }
