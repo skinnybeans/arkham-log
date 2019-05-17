@@ -16,15 +16,17 @@
       <div class="w-25">
           <button 
           class="btn btn-primary w3 h2 mh1 fr"
-          [innerText]="(id === selectedIndex) ? 'Hide' : 'Show'" 
-          (click)="onToggleInvestigator(id, $event)"
-          >Show details
+          [routerLink]="[id]"
+          [routerLinkActive]="'btn-danger'"
+          >Show
       </button>
       </div>
     </div>
   </div>
 </div>
-<div 
+<router-outlet></router-outlet>
+
+<!-- <div 
   *ngIf="selectedInvestigator !== undefined"
   class="pa2">
   <div>
@@ -34,4 +36,4 @@
     <button class="btn btn-success h2 mh1 w3">Save</button>
     <button class="btn btn-danger h2 mh1 w3" (click)="onDeleteInvestigator()">Delete</button>
   </div>
-</div>
+</div> -->

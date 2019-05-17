@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+
 import { Investigator } from './investigator.model';
 import { InvestigatorService } from '../investigator.service';
 
@@ -9,14 +11,25 @@ import { InvestigatorService } from '../investigator.service';
 })
 export class InvestigatorComponent implements OnInit {
 
-  @Input() investigator: Investigator = new Investigator();
-  @Input() investigatorId: number;
+  investigator: Investigator;
+  investigatorId: number;
 
   newNote = '';
 
-  constructor(private investigatorService: InvestigatorService) { }
+  constructor(
+    private investigatorService: InvestigatorService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    // this.investigatorId = +this.route.snapshot.paramMap.get('id');
+    // this.investigator = this.investigatorService.investigators[this.investigatorId];
+
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.investigatorId = +params['id'];
+        this.investigator = this.investigatorService.investigators[this.investigatorId];
+      }
+    );
   }
 
   updateMentalTrauma(modifier: number) {

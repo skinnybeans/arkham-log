@@ -26,7 +26,6 @@
       <input type="text" class="w-75 h2 ba b--blue br2" [(ngModel)]="newNote">
       <button class="btn btn-success w3 h2 mh1" [disabled]="newNote === ''" (click)="addNote()">Add</button>
     </div>
-    <!-- <input type="text" class="ba b--blue br2" [(ngModel)]="newNote" /> -->
   </div>
   <div *ngFor="let t of investigator.notes; let i = index; let even = even"
    class="mv1 ba br2 b--moon-gray">
