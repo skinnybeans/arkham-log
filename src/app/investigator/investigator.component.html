@@ -17,14 +17,14 @@
         <button class="btn btn-primary w2 h2 mh1" (click)="updatePhysicalTrauma(+1)">+</button>
     </div>
   </div>
-  <hr/>
+  <hr class="b--black-10"/>
   <div>
     <div class="b mv2">
         Notes
     </div>
     <div class="flex items-center justify-between mb2">
       <input type="text" class="w-75 h2 ba b--blue br2" [(ngModel)]="newNote">
-      <button class="btn btn-success w2 h2 mh1" [disabled]="newNote === ''" (click)="addNote()">+</button>
+      <button class="btn btn-success w3 h2 mh1" [disabled]="newNote === ''" (click)="addNote()">Add</button>
     </div>
     <!-- <input type="text" class="ba b--blue br2" [(ngModel)]="newNote" /> -->
   </div>
@@ -35,5 +35,4 @@
         <button class="btn btn-danger w2 h2 mh1" (click)="removeNote(i)">-</button>
       </div>      
   </div>
-  <hr>
 </div>
