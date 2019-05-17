@@ -4,9 +4,16 @@
     <!-- <input type="text" class="h2 b--blue br2 ba w-60" [(ngModel)]="campaignName"></div> -->
     <input type="text" class="h2 b--blue br2 ba w-60" [(ngModel)]="campaign.name"></div>
     <p>Campaign type: {{campaign.campaignType}}</p>
-  <div class="flex justify-center sans-serif w-100">
-    <button class="btn btn-primary h2 mh1" [routerLink]="['investigators']">Investigators</button>
-    <button class="btn btn-primary h2 mh1" [routerLink]="['progress']">Progress</button>
+  <div class="sans-serif w-100 ba br2">
+    <div class="f5 bb bw1 b--black-10 flex">
+        <a
+          class="dib link pa3 black" 
+          [routerLink]="['investigators']"
+          [routerLinkActive]="'b--blue b bb bw2'">Investigators</a>
+        <a class="dib link pa3 black"
+          [routerLink]="['progress']"
+          [routerLinkActive]="'b--blue b bb bw2'">Progress</a>
+    </div>
+    <router-outlet></router-outlet>
   </div>
-  <router-outlet></router-outlet>
 </div>

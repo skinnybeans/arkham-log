@@ -21,15 +21,15 @@ export class CampaignPanelComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-
   }
 
   ngOnInit() {
-    this.campaign = this.campaignService.getCampaign(+this.route.snapshot.params['id']);
+    // this.campaign = this.campaignService.getCampaign(+this.route.snapshot.params['id']);
 
     this.route.params.subscribe(
       (params: Params) => {
         this.campaign = this.campaignService.getCampaign(params['id']);
+        this.campaignName = this.campaign.name;
       }
     );
   }
