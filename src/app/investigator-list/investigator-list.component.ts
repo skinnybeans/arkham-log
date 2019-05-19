@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { Investigator } from '../investigator/investigator.model';
 import { InvestigatorService } from '../investigator.service';
@@ -18,20 +19,12 @@ export class InvestigatorListComponent implements OnInit {
   selectedInvestigator: Investigator;
   selectedIndex: number = undefined;
 
-  constructor(private investigatorService: InvestigatorService) { }
+  constructor(
+    private investigatorService: InvestigatorService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.investigators = this.investigatorService.investigators;
-  }
-
-  onToggleInvestigator(id: number, event: any) {
-    if (this.selectedInvestigator === this.investigators[id]) {
-      this.selectedInvestigator = undefined;
-      this.selectedIndex = undefined;
-    } else {
-      this.selectedInvestigator = this.investigators[id];
-      this.selectedIndex = id;
-    }
   }
 
   onDeleteInvestigator() {
