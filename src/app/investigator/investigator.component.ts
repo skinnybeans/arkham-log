@@ -24,7 +24,7 @@ export class InvestigatorComponent implements OnInit {
 
     this.route.paramMap.subscribe(
       (params: ParamMap) => {
-        this.investigatorId = +params.get('id');
+        this.investigatorId = +params.get('investigator_id');
         this.investigator = this.investigatorService.investigators[this.investigatorId];
       }
     );
@@ -49,6 +49,10 @@ export class InvestigatorComponent implements OnInit {
 
   onDelete() {
     this.investigatorService.deleteInvestigator(this.investigatorId);
-    this.router.navigate(['../'], { relativeTo: this.route });
+
+    const investigatorIndex = this.investigatorService.investigators.length - 1;
+    const nav = investigatorIndex >= 0 ? ['../', investigatorIndex] : ['../'];
+
+    this.router.navigate(nav, { relativeTo: this.route });
   }
 }

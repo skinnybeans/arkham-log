@@ -11,9 +11,9 @@ import { InvestigatorComponent } from './investigator/investigator.component';
 const appRoutes: Routes = [
     { path: 'campaigns', component: CampaignListComponent },
     { path: '', redirectTo: '/campaigns', pathMatch: 'full' },
-    { path: 'campaign/:id', component: CampaignPanelComponent, children: [
+    { path: 'campaign/:campaign_id', component: CampaignPanelComponent, children: [
         { path: 'investigators', component: InvestigatorListComponent, children: [
-            { path: ':id', component: InvestigatorComponent}
+            { path: ':investigator_id', component: InvestigatorComponent}
         ]},
         { path: 'progress', component: CampaignProgressComponent}
     ]},

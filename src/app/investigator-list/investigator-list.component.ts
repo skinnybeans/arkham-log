@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Investigator } from '../investigator/investigator.model';
 import { InvestigatorService } from '../investigator.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { routerNgProbeToken } from '@angular/router/src/router_module';
 
 @Component({
   selector: 'app-investigator-list',
@@ -19,7 +20,9 @@ export class InvestigatorListComponent implements OnInit {
   // selectedIndex: number = undefined;
 
   constructor(
-    private investigatorService: InvestigatorService) { }
+    private investigatorService: InvestigatorService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.investigators = this.investigatorService.investigators;
@@ -30,15 +33,9 @@ export class InvestigatorListComponent implements OnInit {
     );
   }
 
-  // onDeleteInvestigator() {
-  //   if (this.selectedIndex !== undefined) {
-  //     this.investigatorService.deleteInvestigator(this.selectedIndex);
-  //     this.selectedInvestigator = undefined;
-  //     this.selectedIndex = undefined;
-  //   }
-  // }
-
   onAddInvestigator() {
     this.investigatorService.addInvestigator();
+    const investigatorIndex = this.investigators.length - 1;
+    this.router.navigate([investigatorIndex], { relativeTo: this.route });
   }
 }

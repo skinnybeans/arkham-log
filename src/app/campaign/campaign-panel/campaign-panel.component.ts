@@ -1,4 +1,4 @@
-import { ActivatedRoute, Router, Params } from '@angular/router';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { CampaignService } from '../campaign.service';
@@ -24,11 +24,9 @@ export class CampaignPanelComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.campaign = this.campaignService.getCampaign(+this.route.snapshot.params['id']);
-
-    this.route.params.subscribe(
-      (params: Params) => {
-        this.campaign = this.campaignService.getCampaign(params['id']);
+    this.route.paramMap.subscribe(
+      (params: ParamMap) => {
+        this.campaign = this.campaignService.getCampaign(+params.get('campaign_id'));
         this.campaignName = this.campaign.name;
       }
     );
