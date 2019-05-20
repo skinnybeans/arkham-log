@@ -9,18 +9,12 @@
     </button>
   </div>
   <div class="w-100">
-    <div 
-    class="flex justify-between items-center ma2" 
-    *ngFor="let investigator of investigators;let id = index">
-      <div class="w-75">{{investigator.name}}</div>
-      <div class="w-25">
-          <button 
-          class="btn btn-primary w3 h2 mh1 fr"
+    <div class="f6 bb bw1 b--black-10 flex w-100">
+        <a
+          *ngFor="let investigator of investigators;let id = index"
+          class="dib link pa3 black w-25"
           [routerLink]="[id]"
-          [routerLinkActive]="'btn-danger'"
-          >Show
-      </button>
-      </div>
+          [routerLinkActive]="'b--light-blue bb i bw2 fw5'">{{ investigator.name }}</a>
     </div>
   </div>
 </div>

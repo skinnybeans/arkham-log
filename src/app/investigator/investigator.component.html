@@ -1,4 +1,4 @@
-<div class="sans-serif f6 mw6">
+<div class="sans-serif f6 mw6 ma2">
   <div class="flex justify-between items-center">
     <div class="b">Name:</div>
     <input type="text" class="mv2 h2 ba pa1 b--blue br2 w-75" [(ngModel)]="investigator.name" />
@@ -33,5 +33,10 @@
         <div class="w-75">{{t}}</div>
         <button class="btn btn-danger w2 h2 mh1" (click)="removeNote(i)">-</button>
       </div>      
+  </div>
+  <hr class="b--black-10"/>
+  <div class="flex justify-between">
+    <button class="btn btn-success w3 h2 mh1">Save</button>
+    <button class="btn btn-danger w3 h2 mh1" (click)="onDelete()">Delete</button>
   </div>
 </div>
