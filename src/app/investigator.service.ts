@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 
 import { Investigator } from './investigator/investigator.model';
 
@@ -8,6 +8,8 @@ import { Investigator } from './investigator/investigator.model';
 export class InvestigatorService {
 
   constructor() { }
+
+  investigatorsChanged = new EventEmitter<Investigator[]>();
 
   investigators: Investigator[] = [
     new Investigator('Wendy Adams', 0 , 1, ['nothing of note here is a long note to test line wrapping']),
@@ -38,9 +40,11 @@ export class InvestigatorService {
 
   deleteInvestigator(investigatorId: number) {
     this.investigators.splice(investigatorId, 1);
+    this.investigatorsChanged.emit(this.investigators.slice());
   }
 
   addInvestigator() {
     this.investigators.push(new Investigator('New Investigator'));
+    this.investigatorsChanged.emit(this.investigators.slice());
   }
 }

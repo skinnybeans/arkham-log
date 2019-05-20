@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { Investigator } from './investigator.model';
 import { InvestigatorService } from '../investigator.service';
@@ -10,7 +10,6 @@ import { InvestigatorService } from '../investigator.service';
   styleUrls: ['./investigator.component.css']
 })
 export class InvestigatorComponent implements OnInit {
-
   investigator: Investigator;
   investigatorId: number;
 
@@ -18,15 +17,14 @@ export class InvestigatorComponent implements OnInit {
 
   constructor(
     private investigatorService: InvestigatorService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
-    // this.investigatorId = +this.route.snapshot.paramMap.get('id');
-    // this.investigator = this.investigatorService.investigators[this.investigatorId];
 
-    this.route.params.subscribe(
-      (params: Params) => {
-        this.investigatorId = +params['id'];
+    this.route.paramMap.subscribe(
+      (params: ParamMap) => {
+        this.investigatorId = +params.get('id');
         this.investigator = this.investigatorService.investigators[this.investigatorId];
       }
     );
@@ -47,5 +45,10 @@ export class InvestigatorComponent implements OnInit {
   addNote() {
     this.investigatorService.addNote(this.investigatorId, this.newNote);
     this.newNote = '';
+  }
+
+  onDelete() {
+    this.investigatorService.deleteInvestigator(this.investigatorId);
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }
