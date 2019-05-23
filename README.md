@@ -1,5 +1,17 @@
 # ArkhamLog
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.5.
+## Overview
 
-Let's see if the CD pipeline works...
+A web app that can track campaign progress for Arkham Horror LCG.
+
+There's no backend to actually save anything yet...
+
+## How to run
+
+1. Install NPM, visit: https://www.npmjs.com/get-npm
+
+1. Pull the source
+
+1. From the source directory run: `npm install`
+
+1. Run `ng serve`
