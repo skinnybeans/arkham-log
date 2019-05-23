@@ -1,28 +1,24 @@
 import { CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { InvestigatorService } from '../investigator.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class InvestigatorIdGuard implements OnInit, CanActivateChild {
-
-    investigatorCount: number;
+export class InvestigatorIdGuard implements CanActivateChild {
 
     constructor(
         private investigatorService: InvestigatorService,
         private router: Router) {}
 
-    ngOnInit() {}
-
     canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot):
     Observable<boolean> | Promise<boolean> | boolean {
 
-        this.investigatorCount = this.investigatorService.investigators.length;
+        const investigatorCount = this.investigatorService.investigators.length;
 
-        if (+childRoute.paramMap.get('investigator_id') < this.investigatorCount) {
+        if (+childRoute.paramMap.get('investigator_id') < investigatorCount) {
             return true;
         }
 
