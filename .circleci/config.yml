@@ -43,7 +43,7 @@ jobs:
           command: npm run ng build --prod
 
       - persist_to_workspace:
-          root: /home/circleci
+          root: ~/
           paths:
             -project
 
@@ -53,7 +53,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: /home/circleci
+          at: ~/
       - run:
           name: Install awscli
           command: sudo pip install awscli
