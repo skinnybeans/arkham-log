@@ -7,31 +7,51 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:10.13
+      - image: circleci/node:10.13-browsers
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mongo:3.4.4
 
-    working_directory: ~/repo
+    working_directory: ~/project
 
     steps:
       - checkout
+
+      - run:
+        name: Show current branch
+        command: echo ${CIRCLE_BRANCH}
 
       # Download and cache dependencies
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
 
-      - run: npm install
+      - run:
+          name: Install project package
+          command: npm install
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run tests!
-      - run: npm run lint
+      ## Test
+      - run:
+          name: Linting
+          command: npm run lint
+
+      ## Build
+      - run:
+          name: Building the package
+          command: npm run ng build --prod
+
+      ## Deploy
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+
+      - run:
+          name: Install awscli
+          command: aws s3 sync ~/project/dist/arkham-log s3://arkham-log.com/ --delete
