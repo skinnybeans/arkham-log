@@ -48,7 +48,7 @@ jobs:
           command: npm run ng build --prod
 
       ## Deploy
-      - run: sudo apt install python-pip python-dev
+      - run: sudo apt-get install python-pip python-dev
 
       - run:
           name: Install awscli
