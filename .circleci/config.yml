@@ -48,10 +48,12 @@ jobs:
           command: npm run ng build --prod
 
       ## Deploy
+      - run: apt install python-pip python-dev
+
       - run:
           name: Install awscli
           command: sudo pip install awscli
 
       - run:
-          name: Install awscli
+          name: Sync files to s3
           command: aws s3 sync ~/project/dist/arkham-log s3://arkham-log.com/ --delete
