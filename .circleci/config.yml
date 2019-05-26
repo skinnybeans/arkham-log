@@ -9,11 +9,6 @@ jobs:
       # specify the version you desire here
       - image: circleci/node:10.13-browsers
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
     working_directory: ~/project
 
     steps:
@@ -47,13 +42,32 @@ jobs:
           name: Building the package
           command: npm run ng build --prod
 
-      ## Deploy
-      - run: sudo apt-get install python-pip python-dev
+      - persist_to_workspace:
+        root: /home/circleci
+        paths: project
 
+  deploy:
+    docker:
+      - image: circleci/python:3.6.8-jessie
+    steps:
+      - checkout
+      - attach_workspace:
+        at: /home/circleci
       - run:
           name: Install awscli
           command: sudo pip install awscli
-
       - run:
-          name: Sync files to s3
-          command: aws s3 sync ~/project/dist/arkham-log s3://arkham-log.com/ --delete
+        name: AWS S3
+        command: aws s3 sync ~/project/dist/arkham-log s3://arkham-log.com/ --delete
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
