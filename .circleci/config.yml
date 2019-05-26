@@ -43,9 +43,9 @@ jobs:
           command: npm run ng build --prod
 
       - persist_to_workspace:
-        root: /home/circleci
-        paths:
-          -project
+          root: /home/circleci
+          paths:
+            -project
 
   deploy:
     docker:
@@ -53,13 +53,13 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-        at: /home/circleci
+          at: /home/circleci
       - run:
           name: Install awscli
           command: sudo pip install awscli
       - run:
-        name: AWS S3
-        command: aws s3 sync ~/project/dist/arkham-log s3://arkham-log.com/ --delete
+          name: AWS S3
+          command: aws s3 sync ~/project/dist/arkham-log s3://arkham-log.com/ --delete
 
 workflows:
   version: 2
