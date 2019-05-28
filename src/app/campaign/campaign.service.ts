@@ -1,4 +1,5 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { Campaign, CampaignType } from './campaign.model';
 
@@ -11,7 +12,7 @@ export class CampaignService {
         { campaignType: CampaignType.Dunwitch , name: 'another dunwitch' },
     ];
 
-    campaignsChanged = new EventEmitter<Campaign[]>();
+    campaignsChanged = new Subject<Campaign[]>();
 
     getCampaign(id: number) {
         return this.campaigns[id];
@@ -23,11 +24,11 @@ export class CampaignService {
 
     addCampaign(campaign: Campaign) {
         this.campaigns.push(campaign);
-        this.campaignsChanged.emit(this.campaigns.slice());
+        this.campaignsChanged.next(this.campaigns.slice());
     }
 
     deleteCampaign(id: number) {
         this.campaigns.splice(id, 1);
-        this.campaignsChanged.emit(this.campaigns.slice());
+        this.campaignsChanged.next(this.campaigns.slice());
     }
 }

@@ -1,10 +1,10 @@
-import { EventEmitter } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { Mission } from './mission.model';
 
 export class CampaignProgressService {
     private notes: string[] = ['some note about the campaign so far...', 'and another note'];
-    notesChanged = new EventEmitter();  // trigger event when the notes are changed.
+    notesChanged = new Subject();  // trigger event when the notes are changed.
 
     private missions: Mission[] = [
         {name: 'mission 2', completed: false, experience: 0, sequence: 2},
@@ -25,12 +25,12 @@ export class CampaignProgressService {
 
     addNote(note: string) {
         this.notes.push(note);
-        this.notesChanged.emit();
+        this.notesChanged.next();
     }
 
     removeNote(id: number) {
         this.notes.splice(id, 1);
-        this.notesChanged.emit();
+        this.notesChanged.next();
     }
 
     getMissions() {
