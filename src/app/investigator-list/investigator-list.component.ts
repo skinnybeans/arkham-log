@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { Investigator } from '../investigator/investigator.model';
 import { InvestigatorService } from '../investigator.service';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { routerNgProbeToken } from '@angular/router/src/router_module';
+
 
 @Component({
   selector: 'app-investigator-list',
   templateUrl: './investigator-list.component.html',
   styleUrls: ['./investigator-list.component.css']
 })
-export class InvestigatorListComponent implements OnInit {
+export class InvestigatorListComponent implements OnInit, OnDestroy {
 
   investigators: Investigator[];
+  investigatorSub: Subscription;
 
   readonly maxInvestigators = 4;
 
@@ -26,11 +28,15 @@ export class InvestigatorListComponent implements OnInit {
 
   ngOnInit() {
     this.investigators = this.investigatorService.investigators;
-    this.investigatorService.investigatorsChanged.subscribe(
+    this.investigatorSub = this.investigatorService.investigatorsChanged.subscribe(
       (investigators: Investigator[]) => {
         this.investigators = investigators;
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.investigatorSub.unsubscribe();
   }
 
   onAddInvestigator() {

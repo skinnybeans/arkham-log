@@ -1,12 +1,12 @@
-import { EventEmitter } from '@angular/core';
+import { Subject } from 'rxjs';
 
 
 export class ZealotProgressService {
     private interrogated: string[] = ['William Blake', 'Mr Smith'];
     private escaped: string[] = [];
 
-    interrogatedChanged = new EventEmitter();
-    escapedChanged = new EventEmitter();
+    interrogatedChanged = new Subject();
+    escapedChanged = new Subject();
 
     getInterrogatedCultists() {
         return this.interrogated.slice();
@@ -18,21 +18,21 @@ export class ZealotProgressService {
 
     addInterrogatedCultist(name: string) {
         this.interrogated.push(name);
-        this.interrogatedChanged.emit();
+        this.interrogatedChanged.next();
     }
 
     removeInterrogatedCultist(id: number) {
         this.interrogated.splice(id, 1);
-        this.interrogatedChanged.emit();
+        this.interrogatedChanged.next();
     }
 
     addEscapedCultist(name: string) {
         this.escaped.push(name);
-        this.escapedChanged.emit();
+        this.escapedChanged.next();
     }
 
     removeEscapedCultist(id: number) {
         this.escaped.splice(id, 1);
-        this.escapedChanged.emit();
+        this.escapedChanged.next();
     }
 }
