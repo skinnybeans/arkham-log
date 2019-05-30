@@ -17,13 +17,13 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
       - run:
           name: Disable pipefail so yes doesn't fail the build
-          run: set +o pipefail
+          command: set +o pipefail
       - run:
           name: Install project package
           command: yes n | npm ci
       - run:
           name: Reenable pipefail
-          run: set -o pipefail
+          command: set -o pipefail
       - save_cache:
           paths:
             - node_modules
