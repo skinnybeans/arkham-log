@@ -8,6 +8,7 @@ import { CampaignProgressComponent } from './campaign/campaign-progress/campaign
 import { InvestigatorComponent } from './investigator/investigator.component';
 import { InvestigatorIdGuard } from './investigator/investigator-id-guard.service';
 import { CampaignIdGuard } from './campaign/campaign-id-guard.service';
+import { InvestigatorStartComponent } from './investigator/investigator-start/investigator-start.component';
 
 
 const appRoutes: Routes = [
@@ -19,9 +20,9 @@ const appRoutes: Routes = [
         children: [
             { path: 'investigators',
                 component: InvestigatorListComponent,
-                canActivateChild: [InvestigatorIdGuard],
                 children: [
-                    { path: ':investigator_id', component: InvestigatorComponent}
+                    { path: '', component: InvestigatorStartComponent, pathMatch: 'full' },
+                    { path: ':investigator_id', component: InvestigatorComponent, canActivate: [InvestigatorIdGuard]}
                 ]
             },
             { path: 'progress', component: CampaignProgressComponent}

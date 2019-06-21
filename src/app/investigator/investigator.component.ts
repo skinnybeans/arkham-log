@@ -49,10 +49,6 @@ export class InvestigatorComponent implements OnInit {
 
   onDelete() {
     this.investigatorService.deleteInvestigator(this.investigatorId);
-
-    const investigatorIndex = this.investigatorService.investigators.length - 1;
-    const nav = investigatorIndex >= 0 ? ['../', investigatorIndex] : ['../'];
-
-    this.router.navigate(nav, { relativeTo: this.route });
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }
