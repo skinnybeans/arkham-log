@@ -13,6 +13,7 @@ import { ZealotProgressComponent } from './campaign/campaign-progress/zealot-pro
 import { HeaderComponent } from './header/header.component';
 import { CampaignListComponent } from './campaign/campaign-list/campaign-list.component';
 import { AppRoutingModule } from './app-routing.module';
+import { InvestigatorStartComponent } from './investigator/investigator-start/investigator-start.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AppRoutingModule } from './app-routing.module';
     MissionsComponent,
     ZealotProgressComponent,
     HeaderComponent,
-    CampaignListComponent
+    CampaignListComponent,
+    InvestigatorStartComponent
   ],
   imports: [
     BrowserModule,
