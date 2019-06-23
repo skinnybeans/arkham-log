@@ -1,3 +1,27 @@
 <div class="pa2 mv1 bb bw1 b--black-10">
-  <p>Dunwitch progress stuff goes here</p>
+  <div class="flex justify-between">
+    <div class="f4">Sacrificed to Yog-Sothoth</div>
+    <div>
+      <input 
+        class="mr1 h2 b--blue br2 ba"
+        type="text" 
+        [(ngModel)]="sacrificed">
+      <button 
+        class="btn btn-success h2 w3"
+        [disabled]="sacrificed === ''">Add</button>
+    </div>
+  </div>
+  
+  <ul class="list ml0 pl0">
+  <li 
+    *ngFor="let cultist of sacrificedList; let i = index">
+    <div 
+      class="flex justify-between items-center pv1 pl1"
+      [ngClass]="{'bg-near-white': i % 2}">
+      <div class="w-80">{{cultist}}</div>
+      <button
+        class="btn btn-danger w2 h2">-</button>
+    </div>
+  </li>
+  </ul>
 </div>
