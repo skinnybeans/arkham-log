@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DunwitchProgressComponent implements OnInit {
 
-  sacrificed: string = '';
+  sacrificed = '';
   sacrificedList: string[] = ['Captain Jack', 'Giant Squid'];
   constructor() { }
 

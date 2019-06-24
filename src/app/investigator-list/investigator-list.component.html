@@ -10,11 +10,15 @@
   </div>
   <div class="w-100">
     <div class="f6 bb bw1 b--black-10 flex w-100">
-        <a
-          *ngFor="let investigator of investigators;let id = index"
-          class="dib link pa3 black w-25"
-          [routerLink]="[id]"
-          [routerLinkActive]="'b--light-blue bb i bw2 fw5'">{{ investigator.name }}</a>
+      <div *ngFor="let investigator of investigators;let id = index" [routerLinkActive]="'b--light-blue bb bw2 fw5'">
+        <button
+          class="gray pv2 ph3 bg-transparent ba b--transparent pointer"
+          [routerLinkActive]="'i'"
+          [routerLink]="[id]">
+          <img src="assets/images/icons/guardian.png">
+          {{ investigator.name }}
+        </button>
+      </div>
     </div>
   </div>
 </div>
