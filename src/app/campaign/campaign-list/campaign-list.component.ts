@@ -1,9 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { Campaign } from '../campaign.model';
 import { CampaignService } from '../campaign.service';
+
 
 @Component({
   selector: 'app-campaign-list',
@@ -14,6 +16,10 @@ export class CampaignListComponent implements OnInit, OnDestroy {
 
   campaigns: Campaign [];
   campaignSub: Subscription;
+  campaignForm: FormGroup = new FormGroup({
+    name: new FormControl(null, [Validators.required]),
+    type: new FormControl(null, [Validators.required])
+  });
 
   constructor(
     private router: Router,
@@ -31,5 +37,9 @@ export class CampaignListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.campaignSub.unsubscribe();
+  }
+
+  onSubmit() {
+    console.log(this.campaignForm);
   }
 }

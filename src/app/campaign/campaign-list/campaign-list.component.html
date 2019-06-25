@@ -7,4 +7,29 @@
     <div>{{campaign.campaignType}} - {{campaign.name}}</div>
     <button class="btn btn-primary w3 h2 mh1" [routerLink]="['/campaign', i, 'investigators']">Open</button>
   </div>
+  <hr>
+  <div class="f4 ml2">Create Campaign</div>
+  <form class="ma2" [formGroup]="campaignForm" (ngSubmit)="onSubmit()">
+    <div class="flex justify-between items-center">
+      <label for="name">Campaign Name: </label>
+      <input
+        type="text"
+        id="name" 
+        formControlName="name"
+        class="mv2 h2 ba pa1 b--blue br2 w-50">
+    </div>
+    <div class="flex justify-between items-center">
+      <label for="type">Campaign Type:</label>
+      <select
+        id="type"
+        formControlName="type"
+        class="mv2 h2 ba pa1 b--blue br2 w-50">
+        <option value="zealot">Night of the Zealot</option>
+        <option value="dunwitch">Dunwitch Legacy</option>
+      </select>
+    </div>
+    <div>
+      <button class="btn btn-success w3 h2 mh1" [disabled]="!campaignForm.valid">Add</button>
+    </div>
+  </form>
 </div>
