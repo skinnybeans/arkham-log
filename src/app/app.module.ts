@@ -14,6 +14,7 @@ import { HeaderComponent } from './header/header.component';
 import { CampaignListComponent } from './campaign/campaign-list/campaign-list.component';
 import { AppRoutingModule } from './app-routing.module';
 import { InvestigatorStartComponent } from './investigator/investigator-start/investigator-start.component';
+import { DunwitchProgressComponent } from './campaign/campaign-progress/dunwitch-progress/dunwitch-progress.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { InvestigatorStartComponent } from './investigator/investigator-start/in
     ZealotProgressComponent,
     HeaderComponent,
     CampaignListComponent,
-    InvestigatorStartComponent
+    InvestigatorStartComponent,
+    DunwitchProgressComponent
   ],
   imports: [
     BrowserModule,
