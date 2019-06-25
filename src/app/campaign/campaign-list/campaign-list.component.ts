@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { Campaign } from '../campaign.model';
+import { Campaign, CampaignType } from '../campaign.model';
 import { CampaignService } from '../campaign.service';
+import { CampaignNotesComponent } from '../campaign-progress/campaign-notes/campaign-notes.component';
 
 
 @Component({
@@ -40,6 +41,9 @@ export class CampaignListComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log(this.campaignForm);
+    const campaignName: string = this.campaignForm.get('name').value;
+    const campaignType: keyof typeof CampaignType = this.campaignForm.get('type').value;
+
+    this.campaignService.addCampaign(new Campaign(CampaignType[campaignType], campaignName));
   }
 }
