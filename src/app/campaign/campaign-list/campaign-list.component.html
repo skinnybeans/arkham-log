@@ -12,11 +12,17 @@
   <form class="ma2" [formGroup]="campaignForm" (ngSubmit)="onSubmit()">
     <div class="flex justify-between items-center">
       <label for="name">Campaign Name: </label>
-      <input
-        type="text"
-        id="name" 
-        formControlName="name"
-        class="mv2 h2 ba pa1 b--blue br2 w-50">
+
+      <div class="w-50">
+        <input
+          type="text"
+          id="name" 
+          formControlName="name"
+          class="mv2 h2 ba pa1 b--blue br2 w-100">
+          <div
+            class="f6 black-60 i"
+            *ngIf="!campaignForm.get('name').valid && campaignForm.get('name').touched">Enter a valid name</div>
+      </div>
     </div>
     <div class="flex justify-between items-center">
       <label for="type">Campaign Type:</label>
