@@ -8,8 +8,8 @@ import { Campaign, CampaignType } from './campaign.model';
   })
 export class CampaignService {
     private campaigns: Campaign[] = [
-        { campaignType: CampaignType.NightOfZealot , name: 'my first zealot' },
-        { campaignType: CampaignType.Dunwitch , name: 'another dunwitch' },
+        { campaignType: CampaignType.nightofzealot , name: 'my first zealot' },
+        { campaignType: CampaignType.dunwitch , name: 'another dunwitch' },
     ];
 
     campaignsChanged = new Subject<Campaign[]>();
