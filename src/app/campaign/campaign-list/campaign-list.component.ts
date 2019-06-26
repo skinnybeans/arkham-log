@@ -45,5 +45,6 @@ export class CampaignListComponent implements OnInit, OnDestroy {
     const campaignType: keyof typeof CampaignType = this.campaignForm.get('type').value;
 
     this.campaignService.addCampaign(new Campaign(CampaignType[campaignType], campaignName));
+    this.campaignForm.reset();
   }
 }
