@@ -33,7 +33,7 @@ const appRoutes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(appRoutes)
+        RouterModule.forRoot(appRoutes, {paramsInheritanceStrategy: 'always'})
     ],
     exports: [RouterModule]
 })
