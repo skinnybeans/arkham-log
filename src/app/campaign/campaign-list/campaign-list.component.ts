@@ -1,11 +1,26 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy
+} from '@angular/core';
+
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+import {
+  FormGroup,
+  FormControl,
+  Validators
+} from '@angular/forms';
+
+import {
+  AngularFirestore,
+  AngularFirestoreDocument
+} from '@angular/fire/firestore';
 
 import { Campaign, CampaignType } from '../campaign.model';
 import { CampaignService } from '../campaign.service';
-import { CampaignNotesComponent } from '../campaign-progress/campaign-notes/campaign-notes.component';
+
 
 
 @Component({
@@ -22,9 +37,12 @@ export class CampaignListComponent implements OnInit, OnDestroy {
     type: new FormControl(null, [Validators.required])
   });
 
+  campaignDoc: AngularFirestoreDocument<Campaign>;
+
   constructor(
     private router: Router,
-    private campaignService: CampaignService) { }
+    private campaignService: CampaignService,
+    private angularFirestore: AngularFirestore) { }
 
   ngOnInit() {
     this.campaigns = this.campaignService.getCampaigns();
@@ -46,5 +64,14 @@ export class CampaignListComponent implements OnInit, OnDestroy {
 
     this.campaignService.addCampaign(new Campaign(CampaignType[campaignType], campaignName));
     this.campaignForm.reset();
+
+    this.angularFirestore.collection('campaigns').add(this.campaigns[0]).then(
+      res => {
+        console.log('Saved');
+      },
+      reject => {
+        console.log(`Didn't save`);
+      }
+    );
   }
 }
