@@ -67,18 +67,24 @@ export class CampaignListComponent implements OnInit, OnDestroy {
     );
 
     // writing data
-    from(this.angularFirestore.collection<Campaign>('campaigns').doc('XMRoNhBQwIOHKTChTSeA').set({name: 'setting through app'}, {merge: true})).subscribe(
-      res => {
-        console.log('update success');
-        console.log(res);
-      },
-      error => {
-        console.log(error);
-      },
-      () => {
-        console.log('update finished');
-      }
-    );
+    from(
+      this.angularFirestore
+        .collection<Campaign>('campaigns')
+        .doc('XMRoNhBQwIOHKTChTSeA')
+        .set({name: 'setting through app'}, {merge: true})
+    )
+      .subscribe(
+        res => {
+          console.log('update success');
+          console.log(res);
+        },
+        error => {
+          console.log(error);
+        },
+        () => {
+          console.log('update finished');
+        }
+      );
   }
 
   ngOnDestroy() {
