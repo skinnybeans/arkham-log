@@ -1,12 +1,17 @@
 <div class="ba br2 mw6 mv1">
   <div class="f4 ml2">Campaigns</div>
-  <div 
-    *ngFor="let campaign of campaigns; let i = index" 
-    class="flex justify-between items-center ma2"
-  >
-    <div>{{campaign.campaignType}} - {{campaign.name}}</div>
-    <button class="btn btn-primary w3 h2 mh1" [routerLink]="['/campaign', i, 'investigators']">Open</button>
+  <div *ngIf="loadingCampaigns; else campaignBlock">
+    <div class="loader"></div>
   </div>
+  <ng-template #campaignBlock>
+    <div *ngFor="let campaign of campaigns; let i = index" class="flex justify-between items-center ma2">
+      <div>{{campaign.campaignType}} - {{campaign.name}}</div>
+      <div>
+        <button class="btn btn-primary w3 h2 mh1" [routerLink]="['/campaign', i, 'investigators']">Open</button>
+        <button class="btn btn-danger w3 h2 mh1" (click)="onDelete(campaign.id)">Delete</button>
+      </div>
+    </div>
+  </ng-template>
   <hr>
   <div class="f4 ml2">Create Campaign</div>
   <form class="ma2" [formGroup]="campaignForm" (ngSubmit)="onSubmit()">
@@ -26,14 +31,19 @@
     </div>
     <div class="flex justify-between items-center">
       <label for="type">Campaign Type:</label>
-      <select
-        id="type"
-        formControlName="type"
-        class="mv2 h2 ba pa1 b--blue br2 w-50">
-        <option value="nightofzealot">Night of the Zealot</option>
-        <option value="dunwitch">Dunwitch Legacy</option>
-      </select>
-    </div>
+      <div class="w-50">
+        <select
+          id="type"
+          formControlName="type"
+          class="mv2 h2 ba pa1 b--blue br2 w-100">
+          <option value="nightofzealot">Night of the Zealot</option>
+          <option value="dunwitch">Dunwitch Legacy</option>
+        </select>
+        <div class="f6 black-60 i" *ngIf="!campaignForm.get('type').valid && campaignForm.get('type').touched">
+          Select a campaign type
+        </div>
+      </div>
+      </div>
     <div>
       <button class="btn btn-success w3 h2 mh1" [disabled]="!campaignForm.valid">Add</button>
     </div>

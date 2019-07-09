@@ -1,11 +1,23 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  Component,
+  OnInit,
+  OnDestroy
+} from '@angular/core';
+
+import {
+  Subscription
+} from 'rxjs';
+
+import {
+  FormGroup,
+  FormControl,
+  Validators
+} from '@angular/forms';
 
 import { Campaign, CampaignType } from '../campaign.model';
 import { CampaignService } from '../campaign.service';
-import { CampaignNotesComponent } from '../campaign-progress/campaign-notes/campaign-notes.component';
+import { retry } from 'rxjs/operators';
+
 
 
 @Component({
@@ -16,35 +28,58 @@ import { CampaignNotesComponent } from '../campaign-progress/campaign-notes/camp
 export class CampaignListComponent implements OnInit, OnDestroy {
 
   campaigns: Campaign [];
-  campaignSub: Subscription;
+  campaignSubs: Subscription = new Subscription();
+
+  loadingCampaigns = true;
+
   campaignForm: FormGroup = new FormGroup({
     name: new FormControl(null, [Validators.required]),
     type: new FormControl(null, [Validators.required])
   });
 
   constructor(
-    private router: Router,
-    private campaignService: CampaignService) { }
+    private campaignService: CampaignService
+  ) {}
 
   ngOnInit() {
     this.campaigns = this.campaignService.getCampaigns();
 
-    this.campaignSub = this.campaignService.campaignsChanged.subscribe(
+    this.campaignSubs.add(this.campaignService.campaignsChanged.subscribe(
       (campaigns: Campaign[]) => {
         this.campaigns = campaigns;
+        this.loadingCampaigns = false;
       }
-    );
+    ));
   }
 
   ngOnDestroy() {
-    this.campaignSub.unsubscribe();
+    this.campaignSubs.unsubscribe();
+  }
+
+  onDelete(id: string) {
+    this.loadingCampaigns = true;
+    this.campaignService.deleteCampaign(id).subscribe(
+      _ => {},
+      err => {
+        console.log('error detection from the component');
+      }
+    );
   }
 
   onSubmit() {
     const campaignName: string = this.campaignForm.get('name').value;
     const campaignType: keyof typeof CampaignType = this.campaignForm.get('type').value;
+    this.loadingCampaigns = true;
 
-    this.campaignService.addCampaign(new Campaign(CampaignType[campaignType], campaignName));
-    this.campaignForm.reset();
+    this.campaignSubs.add(
+      this.campaignService.addCampaign(new Campaign(CampaignType[campaignType], campaignName)).subscribe(
+        () => {
+          this.campaignForm.reset();
+        },
+        (err) => {
+          console.log('error occurred when deleting');
+        }
+      )
+    );
   }
 }
