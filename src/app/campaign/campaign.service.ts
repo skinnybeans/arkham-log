@@ -1,5 +1,14 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
+import {
+    Injectable,
+    OnDestroy
+} from '@angular/core';
+
+import {
+    Subject,
+    Subscription,
+} from 'rxjs';
+
+import { tap, retry } from 'rxjs/operators';
 
 import { Campaign } from './campaign.model';
 import { DataStorageService } from '../data-storage.service';
@@ -51,8 +60,15 @@ export class CampaignService implements OnDestroy {
     }
 
     deleteCampaign(id: string) {
-        return this.dataStorageService.deleteCampaign(id);
-        // this.campaigns.splice(id, 1);
-        // this.campaignsChanged.next(this.campaigns.slice());
+        return this.dataStorageService.deleteCampaign(id)
+        .pipe(
+            tap(
+                _ => {
+                    console.log('tapped the delete success');
+                },
+                (error) => {
+                    console.log('tapped the delete error');
+                }),
+        );
     }
 }

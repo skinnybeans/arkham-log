@@ -16,6 +16,7 @@ import {
 
 import { Campaign, CampaignType } from '../campaign.model';
 import { CampaignService } from '../campaign.service';
+import { retry } from 'rxjs/operators';
 
 
 
@@ -28,6 +29,9 @@ export class CampaignListComponent implements OnInit, OnDestroy {
 
   campaigns: Campaign [];
   campaignSubs: Subscription = new Subscription();
+
+  loadingCampaigns = true;
+
   campaignForm: FormGroup = new FormGroup({
     name: new FormControl(null, [Validators.required]),
     type: new FormControl(null, [Validators.required])
@@ -43,6 +47,7 @@ export class CampaignListComponent implements OnInit, OnDestroy {
     this.campaignSubs.add(this.campaignService.campaignsChanged.subscribe(
       (campaigns: Campaign[]) => {
         this.campaigns = campaigns;
+        this.loadingCampaigns = false;
       }
     ));
   }
@@ -52,19 +57,27 @@ export class CampaignListComponent implements OnInit, OnDestroy {
   }
 
   onDelete(id: string) {
-    this.campaignService.deleteCampaign(id);
+    this.loadingCampaigns = true;
+    this.campaignService.deleteCampaign(id).subscribe(
+      _ => {},
+      err => {
+        console.log('error detection from the component');
+      }
+    );
   }
 
   onSubmit() {
     const campaignName: string = this.campaignForm.get('name').value;
     const campaignType: keyof typeof CampaignType = this.campaignForm.get('type').value;
+    this.loadingCampaigns = true;
 
     this.campaignSubs.add(
       this.campaignService.addCampaign(new Campaign(CampaignType[campaignType], campaignName)).subscribe(
-        result => {
-          console.log('finished adding campaign');
-          console.log(result);
+        () => {
           this.campaignForm.reset();
+        },
+        (err) => {
+          console.log('error occurred when deleting');
         }
       )
     );
