@@ -16,8 +16,7 @@ export class DataStorageService {
     private campaignCollection: AngularFirestoreCollection;
     constructor(
         private angularFirestore: AngularFirestore
-    )
-    {
+    ) {
         this.campaignCollection = this.angularFirestore.collection('campaigns');
     }
 
