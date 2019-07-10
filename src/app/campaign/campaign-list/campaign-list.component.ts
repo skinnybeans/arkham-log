@@ -59,7 +59,10 @@ export class CampaignListComponent implements OnInit, OnDestroy {
   onDelete(id: string) {
     this.loadingCampaigns = true;
     this.campaignService.deleteCampaign(id).subscribe(
-      _ => {},
+      (result) => {
+        console.log('delete success');
+        console.log(result);
+      },
       err => {
         console.log('error detection from the component');
       }
