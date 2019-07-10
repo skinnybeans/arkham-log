@@ -6,9 +6,11 @@ import {
 import {
     Subject,
     Subscription,
+    EMPTY,
+    throwError,
 } from 'rxjs';
 
-import { tap, retry } from 'rxjs/operators';
+import { tap, retry, shareReplay, catchError } from 'rxjs/operators';
 
 import { Campaign } from './campaign.model';
 import { DataStorageService } from '../data-storage.service';
@@ -62,13 +64,13 @@ export class CampaignService implements OnDestroy {
     deleteCampaign(id: string) {
         return this.dataStorageService.deleteCampaign(id)
         .pipe(
-            tap(
-                _ => {
-                    console.log('tapped the delete success');
-                },
-                (error) => {
-                    console.log('tapped the delete error');
-                }),
+            catchError(
+                (err) => {
+                    console.log('catch error from the service');
+                    console.log(err);
+                    return throwError(err);
+                }
+            )
         );
     }
 }
