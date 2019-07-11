@@ -5,7 +5,10 @@ import {
     AngularFirestore, AngularFirestoreCollection,
 } from '@angular/fire/firestore';
 import { Campaign } from '../campaign/campaign.model';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
+import { LogService } from './log.service';
+import { Router } from '@angular/router';
+import { LogError, LogLevel } from './log.model';
 
 
 @Injectable({
@@ -15,7 +18,9 @@ export class DataStorageService {
 
     private campaignCollection: AngularFirestoreCollection;
     constructor(
-        private angularFirestore: AngularFirestore
+        private angularFirestore: AngularFirestore,
+        private logService: LogService,
+        private router: Router
     ) {
         this.campaignCollection = this.angularFirestore.collection('campaigns');
     }
@@ -36,6 +41,25 @@ export class DataStorageService {
     }
 
     deleteCampaign(id: string) {
-        return from(this.campaignCollection.doc(id).delete());
+        return from(this.campaignCollection.doc(id).delete()).pipe(
+            catchError(
+                (error) => {
+                    const logError: LogError = {
+                        level: LogLevel.error,
+                        url: this.router.url,
+                        action: `deleteCampaign/${id}`,
+                        type: error.name,
+                        code: error.code,
+                        message: error.message,
+                        stack: error.stack
+                    };
+                    this.logService.LogFirebaseError(logError);
+                    return throwError(error);
+                }
+            ),
+            tap(_ => {
+
+            })
+        );
     }
 }

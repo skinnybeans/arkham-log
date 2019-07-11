@@ -6,16 +6,11 @@ import {
 import {
     Subject,
     Subscription,
-    EMPTY,
-    throwError,
 } from 'rxjs';
 
-import { catchError } from 'rxjs/operators';
 
 import { Campaign } from './campaign.model';
 import { DataStorageService } from '../common/data-storage.service';
-import { Router } from '@angular/router';
-import { LoggerService } from '../common/logger.service';
 
 
 
@@ -30,8 +25,6 @@ export class CampaignService implements OnDestroy {
 
     constructor(
         private dataStorageService: DataStorageService,
-        private route: Router,
-        private loggerService: LoggerService
     ) {}
 
     ngOnDestroy() {
@@ -62,14 +55,6 @@ export class CampaignService implements OnDestroy {
     }
 
     deleteCampaign(id: string) {
-        return this.dataStorageService.deleteCampaign(id)
-        .pipe(
-            catchError(
-                (error) => {
-                    this.loggerService.LogFirebaseError(error, this.route.url);
-                    return throwError(error);
-                }
-            )
-        );
+        return this.dataStorageService.deleteCampaign(id);
     }
 }
