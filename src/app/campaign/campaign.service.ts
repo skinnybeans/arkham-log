@@ -3,6 +3,8 @@ import {
     OnDestroy
 } from '@angular/core';
 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import {
     Subject,
     Subscription,
@@ -10,10 +12,21 @@ import {
     throwError,
 } from 'rxjs';
 
-import { tap, retry, shareReplay, catchError } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 import { Campaign } from './campaign.model';
-import { DataStorageService } from '../data-storage.service';
+import { DataStorageService } from '../common/data-storage.service';
+import { ActivatedRoute, RouterStateSnapshot, Router } from '@angular/router';
+
+const SumoLogger = require('sumo-logger');
+
+const opts = {
+    endpoint: 'https://collectors.au.sumologic.com/receiver/v1/http/ZaVnC4dhaV1d433iVnVuph10fzy6acOKJYlmhV5cg_IejVVOwQa56kMcfxPDnnz3Y54epgiZkrL6w6WV_5xaz0vhpqY4Gx-k-paFSGZLm7f8QvKSna6qAA==',
+    // ... any other options ...
+};
+
+// Instantiate the SumoLogger
+const sumoLogger = new SumoLogger(opts);
 
 @Injectable({
     providedIn: 'root'
@@ -29,7 +42,9 @@ export class CampaignService implements OnDestroy {
     campaignsChanged = new Subject<Campaign[]>();
 
     constructor(
-        private dataStorageService: DataStorageService
+        private dataStorageService: DataStorageService,
+        private http: HttpClient,
+        private route: Router
     ) {}
 
     ngOnDestroy() {
@@ -65,10 +80,11 @@ export class CampaignService implements OnDestroy {
         return this.dataStorageService.deleteCampaign(id)
         .pipe(
             catchError(
-                (err) => {
-                    console.log('catch error from the service');
-                    console.log(err);
-                    return throwError(err);
+                (error) => {
+                    sumoLogger.log(
+                        { name: error.name, code: error.code, message: error.message, stack: error.stack },
+                        {url: this.route.url});
+                    return throwError(error);
                 }
             )
         );

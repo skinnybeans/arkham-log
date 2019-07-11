@@ -4,7 +4,7 @@ import { from, throwError, Observable } from 'rxjs';
 import {
     AngularFirestore, AngularFirestoreCollection,
 } from '@angular/fire/firestore';
-import { Campaign } from './campaign/campaign.model';
+import { Campaign } from '../campaign/campaign.model';
 import { catchError } from 'rxjs/operators';
 
 
