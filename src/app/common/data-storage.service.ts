@@ -8,7 +8,7 @@ import { Campaign } from '../campaign/campaign.model';
 import { catchError, tap } from 'rxjs/operators';
 import { LogService } from './log.service';
 import { Router } from '@angular/router';
-import { LogError, LogLevel } from './log.model';
+import { LogError, LogLevel, LogEvent } from './log.model';
 
 
 @Injectable({
@@ -53,12 +53,20 @@ export class DataStorageService {
                         message: error.message,
                         stack: error.stack
                     };
-                    this.logService.LogFirebaseError(logError);
+                    this.logService.LogError(logError);
                     return throwError(error);
                 }
             ),
             tap(_ => {
+                console.log('delete success');
+                const logEvent: LogEvent = {
+                    level: LogLevel.info,
+                    url: this.router.url,
+                    action: `deleteCampaign/${id}`,
+                    message: `Deleting campaign with id: ${id}`
+                };
 
+                this.logService.LogEvent(logEvent);
             })
         );
     }

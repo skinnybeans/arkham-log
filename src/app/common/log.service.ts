@@ -18,22 +18,22 @@ const sumoLogger = new SumoLogger(opts);
     providedIn: 'root'
 })
 export class LogService {
-    LogFirebaseError(error: LogError) {
+    LogError(error: LogError) {
         const {url, ...log} = error;
-
-        console.log(error);
-        sumoLogger.log(log, { url }).catch( (err: any) => {
+        sumoLogger.log(
+            log,
+            { url }).catch( (err: any) => {
             console.log('error logging to sumo');
             console.log(err);
         });
+        sumoLogger.flushLogs();
     }
 
-    LogFirebaseSuccess(error: any, url: string) {
-        const { code, name, message, stack, action } = error;
-        console.log({ level: 'error', url, code, name, message, stack });
+    LogEvent(event: LogEvent) {
+        const { url, ...log } = event;
         sumoLogger.log(
-            { level: 'error', action, code, name, message, stack },
-            { url }
+            log,
+            { url}
         ).catch((err: any) => {
             console.log('error logging to sumo');
             console.log(err);
