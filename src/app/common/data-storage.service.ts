@@ -27,17 +27,97 @@ export class DataStorageService {
 
     // Return all saved campaigns
     loadCampaigns(): Observable<Campaign[]> {
-        return (from(this.campaignCollection.valueChanges({ idField: 'id' })) as Observable<Campaign[]>);
+        return (from(this.campaignCollection.valueChanges({ idField: 'id' })) as Observable<Campaign[]>)
+            .pipe(
+                catchError(
+                    (error) => {
+                        const logError: LogError = {
+                            level: LogLevel.error,
+                            url: this.router.url,
+                            action: `loadCampaigns`,
+                            type: error.name,
+                            code: error.code,
+                            message: error.message,
+                            stack: error.stack
+                        };
+                        this.logService.LogError(logError);
+                        return throwError(error);
+                    }
+                ),
+                tap(_ => {
+                    const logEvent: LogEvent = {
+                        level: LogLevel.info,
+                        url: this.router.url,
+                        action: `loadCampaigns`,
+                        message: `Loaded campaigns from firebase`
+                    };
+
+                    this.logService.LogEvent(logEvent);
+                })
+            );
     }
 
     updateCampaign(campaign: Campaign) {
         const { id, ...things } = campaign;
-        return from(this.campaignCollection.doc(id).set(things, {merge: true}));
+        return from(this.campaignCollection.doc(id).set(things, {merge: true}))
+            .pipe(
+                catchError(
+                    (error) => {
+                        const logError: LogError = {
+                            level: LogLevel.error,
+                            url: this.router.url,
+                            action: `updateCampaign/${id}`,
+                            type: error.name,
+                            code: error.code,
+                            message: error.message,
+                            stack: error.stack
+                        };
+                        this.logService.LogError(logError);
+                        return throwError(error);
+                    }
+                ),
+                tap(_ => {
+                    const logEvent: LogEvent = {
+                        level: LogLevel.info,
+                        url: this.router.url,
+                        action: `updateCampaign`,
+                        message: `Updated campaign in firebase id: ${id}`
+                    };
+
+                    this.logService.LogEvent(logEvent);
+                })
+            );
     }
 
     createCampaign(campaign: Campaign) {
         const { id, ...things} = campaign;
-        return from(this.campaignCollection.add(things));
+        return from(this.campaignCollection.add(things))
+            .pipe(
+                catchError(
+                    (error) => {
+                        const logError: LogError = {
+                            level: LogLevel.error,
+                            url: this.router.url,
+                            action: `addCampaign`,
+                            type: error.name,
+                            code: error.code,
+                            message: error.message,
+                            stack: error.stack
+                        };
+                        this.logService.LogError(logError);
+                        return throwError(error);
+                    }
+                ),
+                tap(result => {
+                    const logEvent: LogEvent = {
+                        level: LogLevel.info,
+                        url: this.router.url,
+                        action: `addCampaign`,
+                        message: `Added new campaign to firebase: ${result.path}`
+                    };
+                    this.logService.LogEvent(logEvent);
+                })
+            );
     }
 
     deleteCampaign(id: string) {
@@ -58,7 +138,6 @@ export class DataStorageService {
                 }
             ),
             tap(_ => {
-                console.log('delete success');
                 const logEvent: LogEvent = {
                     level: LogLevel.info,
                     url: this.router.url,

@@ -26,7 +26,6 @@ export class LogService {
             console.log('error logging to sumo');
             console.log(err);
         });
-        sumoLogger.flushLogs();
     }
 
     LogEvent(event: LogEvent) {
