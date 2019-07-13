@@ -6,30 +6,25 @@ import {
 import {
     Subject,
     Subscription,
-    EMPTY,
-    throwError,
 } from 'rxjs';
 
-import { tap, retry, shareReplay, catchError } from 'rxjs/operators';
 
 import { Campaign } from './campaign.model';
-import { DataStorageService } from '../data-storage.service';
+import { DataStorageService } from '../common/data-storage.service';
+
+
 
 @Injectable({
     providedIn: 'root'
   })
 export class CampaignService implements OnDestroy {
     private campaigns: Campaign[];
-    // private campaigns: Campaign[] = [
-    //     { campaignType: CampaignType.nightofzealot , name: 'my first zealot' },
-    //     { campaignType: CampaignType.dunwitch , name: 'another dunwitch' },
-    // ];
 
     private campaignSub: Subscription;
     campaignsChanged = new Subject<Campaign[]>();
 
     constructor(
-        private dataStorageService: DataStorageService
+        private dataStorageService: DataStorageService,
     ) {}
 
     ngOnDestroy() {
@@ -57,20 +52,9 @@ export class CampaignService implements OnDestroy {
 
     addCampaign(campaign: Campaign) {
         return this.dataStorageService.createCampaign(campaign);
-        // this.campaigns.push(campaign);
-        // this.campaignsChanged.next(this.campaigns.slice());
     }
 
     deleteCampaign(id: string) {
-        return this.dataStorageService.deleteCampaign(id)
-        .pipe(
-            catchError(
-                (err) => {
-                    console.log('catch error from the service');
-                    console.log(err);
-                    return throwError(err);
-                }
-            )
-        );
+        return this.dataStorageService.deleteCampaign(id);
     }
 }

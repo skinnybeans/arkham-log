@@ -80,7 +80,7 @@ export class CampaignListComponent implements OnInit, OnDestroy {
           this.campaignForm.reset();
         },
         (err) => {
-          console.log('error occurred when deleting');
+          console.log('error occurred when adding');
         }
       )
     );
