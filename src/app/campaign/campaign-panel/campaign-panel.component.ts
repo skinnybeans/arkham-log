@@ -26,7 +26,7 @@ export class CampaignPanelComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(
       (params: ParamMap) => {
-        this.campaign = this.campaignService.getCampaign(+params.get('campaign_id'));
+        this.campaign = this.campaignService.getCampaign(params.get('campaign_id'));
         this.campaignName = this.campaign.name;
       }
     );

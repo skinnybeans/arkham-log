@@ -14,7 +14,7 @@ import { Campaign, CampaignType } from '../campaign.model';
 })
 export class CampaignProgressComponent implements OnInit {
 
-  campaignId: number;
+  campaignId: string;
   campaign: Campaign;
 
   constructor(
@@ -26,7 +26,7 @@ export class CampaignProgressComponent implements OnInit {
     this.route.paramMap.subscribe(
       (params: ParamMap) => {
         // this.campaignId = +this.route.parent.snapshot.paramMap.get('campaign_id');
-        this.campaignId = +params.get('campaign_id');
+        this.campaignId = params.get('campaign_id');
         this.campaign = this.campaignService.getCampaign(this.campaignId);
       }
     );

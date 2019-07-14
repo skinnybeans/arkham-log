@@ -19,9 +19,9 @@ export class CampaignIdGuard implements CanActivate, OnInit {
     Observable<boolean> | Promise<boolean> | boolean {
 
         const campaignCount = this.campaignService.getCampaigns().length;
-        const campaignId = +route.paramMap.get('campaign_id');
+        const campaignId = route.paramMap.get('campaign_id');
 
-        if ((campaignId < campaignCount) && campaignId != null) {
+        if (this.campaignService.getCampaign(campaignId) && campaignId != null) {
             return true;
         }
         this.router.navigate(['/campaigns']);
