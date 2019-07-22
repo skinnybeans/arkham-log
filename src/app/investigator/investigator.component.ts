@@ -11,7 +11,7 @@ import { InvestigatorService } from '../investigator.service';
 })
 export class InvestigatorComponent implements OnInit {
   investigator: Investigator;
-  investigatorId: number;
+  investigatorId: string;
 
   newNote = '';
 
@@ -24,8 +24,8 @@ export class InvestigatorComponent implements OnInit {
 
     this.route.paramMap.subscribe(
       (params: ParamMap) => {
-        this.investigatorId = +params.get('investigator_id');
-        this.investigator = this.investigatorService.investigators[this.investigatorId];
+        this.investigatorId = params.get('investigator_id');
+        this.investigator = this.investigatorService.getInvestigator(this.investigatorId);
       }
     );
   }

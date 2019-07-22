@@ -3,18 +3,17 @@
     <p>Investigators</p>
     <button 
       class="btn btn-success w3 h2"
-      (click)="onAddInvestigator()"
-      [disabled]="!(investigators.length < 4)">
+      (click)="onAddInvestigator()">
         Add
     </button>
   </div>
   <div class="w-100">
     <div class="f6 bb bw1 b--black-10 flex w-100">
-      <div *ngFor="let investigator of investigators;let id = index" [routerLinkActive]="'b--light-blue bb bw2 fw5'">
+      <div *ngFor="let investigator of investigators" [routerLinkActive]="'b--light-blue bb bw2 fw5'">
         <button
           class="black pv2 ph3 bg-transparent ba b--transparent pointer"
           [routerLinkActive]="'i'"
-          [routerLink]="[id]">
+          [routerLink]="investigator.id">
           {{ investigator.name }}
         </button>
       </div>

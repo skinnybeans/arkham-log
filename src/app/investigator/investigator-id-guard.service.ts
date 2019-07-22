@@ -16,13 +16,14 @@ export class InvestigatorIdGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
     Observable<boolean> | Promise<boolean> | boolean {
 
-        const investigatorCount = this.investigatorService.investigators.length;
+        // const investigatorCount = this.investigatorService.getInvestigators().length;
 
-        if (+route.paramMap.get('investigator_id') < investigatorCount) {
-            return true;
-        }
+        // if (+route.paramMap.get('investigator_id') < investigatorCount) {
+        //     return true;
+        // }
 
-        this.router.navigate(['/campaigns']);
-        return false;
+        // this.router.navigate(['/campaigns']);
+        // return false;
+        return true;
     }
 }

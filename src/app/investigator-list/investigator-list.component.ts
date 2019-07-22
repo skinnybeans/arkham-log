@@ -27,7 +27,7 @@ export class InvestigatorListComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.investigators = this.investigatorService.investigators;
+    this.investigators = this.investigatorService.getInvestigators(this.route.snapshot.paramMap.get('campaign_id'));
     this.investigatorSub = this.investigatorService.investigatorsChanged.subscribe(
       (investigators: Investigator[]) => {
         this.investigators = investigators;
@@ -41,7 +41,7 @@ export class InvestigatorListComponent implements OnInit, OnDestroy {
 
   onAddInvestigator() {
     this.investigatorService.addInvestigator();
-    const investigatorIndex = this.investigators.length - 1;
-    this.router.navigate([investigatorIndex], { relativeTo: this.route });
+    // const investigatorIndex = this.investigators.length - 1;
+    // this.router.navigate([investigatorIndex], { relativeTo: this.route });
   }
 }

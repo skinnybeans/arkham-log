@@ -9,6 +9,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { LogService } from './log.service';
 import { Router } from '@angular/router';
 import { LogError, LogLevel, LogEvent } from './log.model';
+import { Investigator } from '../investigator/investigator.model';
 
 
 @Injectable({
@@ -17,12 +18,26 @@ import { LogError, LogLevel, LogEvent } from './log.model';
 export class DataStorageService {
 
     private campaignCollection: AngularFirestoreCollection;
+    private investigatorCollection: AngularFirestoreCollection;
     constructor(
         private angularFirestore: AngularFirestore,
         private logService: LogService,
         private router: Router
     ) {
         this.campaignCollection = this.angularFirestore.collection('campaigns');
+    }
+
+    loadInvestigators(campaignId: string) {
+        this.investigatorCollection = this.campaignCollection.doc(campaignId).collection('investigators');
+        return (from(this.investigatorCollection.valueChanges({ idField: 'id' })) as Observable<Investigator[]>)
+            .pipe(
+                catchError(
+                    error => {
+                        console.log('error loading investigators');
+                        return throwError(error);
+                    }
+                )
+            );
     }
 
     // Return all saved campaigns
@@ -44,7 +59,7 @@ export class DataStorageService {
                         return throwError(error);
                     }
                 ),
-                tap(_ => {
+                tap( _ => {
                     const logEvent: LogEvent = {
                         level: LogLevel.info,
                         url: this.router.url,
