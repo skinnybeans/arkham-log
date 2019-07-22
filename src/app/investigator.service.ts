@@ -10,7 +10,9 @@ import { DataStorageService } from './common/data-storage.service';
 export class InvestigatorService {
 
   investigatorSub: Subscription = new Subscription();
-  campaignId: string;
+
+  private investigators: Investigator[] = null;
+  private campaignId: string = null; // stores which campaign to read investigators from
 
   constructor(
     private dataStorageService: DataStorageService
@@ -23,13 +25,17 @@ export class InvestigatorService {
   //   new Investigator('Roland Banks', 1 , 1, ['relic of ages'])
   // ];
 
-    private investigators: Investigator[];
+  setCampaignId(id: string) {
+    if (this.campaignId !== id) {
+      this.campaignId = id;
+      this.investigators = null;
+    }
+  }
 
-  getInvestigators(campaignId: string) {
-    if ((this.campaignId !== campaignId) || this.investigators === undefined) {
-      this.campaignId = campaignId;
+  getInvestigators() {
+    if (!this.investigators && this.campaignId) {
       this.investigatorSub.unsubscribe();
-      this.investigatorSub = this.dataStorageService.loadInvestigators(campaignId).subscribe(
+      this.investigatorSub = this.dataStorageService.loadInvestigators(this.campaignId).subscribe(
         (investigators: Investigator[]) => {
           this.investigators = investigators;
           console.log(investigators);
@@ -39,12 +45,11 @@ export class InvestigatorService {
     } else {
       return this.investigators.slice();
     }
-    //this.dataStorageService.loadInvestigators('076pZwvjR5R8MErmISOr');
   }
 
   getInvestigator(id: string) {
     if (!this.investigators) {
-      this.getInvestigators(this.campaignId);
+      this.getInvestigators();
     }
     return this.investigators.find( investigator => {
       return investigator.id === id ? true : false;
@@ -59,6 +64,7 @@ export class InvestigatorService {
       if (investigator.mentalTrauma < 0) {
         investigator.mentalTrauma = 0;
       }
+      this.dataStorageService.updateInvestigator(investigator);
     }
   }
 
@@ -70,28 +76,28 @@ export class InvestigatorService {
       if (investigator.physicalTrauma < 0) {
         investigator.physicalTrauma = 0;
       }
+      this.dataStorageService.updateInvestigator(investigator);
     }
   }
 
   removeNote(investigatorId: string, noteId: number) {
     const investigator = this.getInvestigator(investigatorId);
     investigator.notes.splice(noteId, 1);
+    this.dataStorageService.updateInvestigator(investigator);
   }
 
   addNote(investigatorId: string, newNote: string) {
+    console.log(investigatorId);
     const investigator = this.getInvestigator(investigatorId);
-    investigator[investigatorId].notes.push(newNote);
+    investigator.notes.push(newNote);
+    this.dataStorageService.updateInvestigator(investigator);
   }
 
   deleteInvestigator(investigatorId: string) {
-    //const investigator = this.getInvestigator(investigatorId);
-
-    //this.investigators.splice(investigatorId, 1);
-    //this.investigatorsChanged.next(this.investigators.slice());
+    this.dataStorageService.deleteInvestigator(investigatorId);
   }
 
   addInvestigator() {
-    this.investigators.push(new Investigator('New Investigator'));
-    this.investigatorsChanged.next(this.investigators.slice());
+    this.dataStorageService.createInvestigator(new Investigator('new investigator'));
   }
 }

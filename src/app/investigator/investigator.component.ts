@@ -1,17 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { Investigator } from './investigator.model';
 import { InvestigatorService } from '../investigator.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-investigator',
   templateUrl: './investigator.component.html',
   styleUrls: ['./investigator.component.css']
 })
-export class InvestigatorComponent implements OnInit {
+export class InvestigatorComponent implements OnInit, OnDestroy {
+
   investigator: Investigator;
   investigatorId: string;
+  investigatorSub: Subscription;
 
   newNote = '';
 
@@ -22,12 +25,23 @@ export class InvestigatorComponent implements OnInit {
 
   ngOnInit() {
 
+    // If the route changes make sure to load a new investigator
     this.route.paramMap.subscribe(
       (params: ParamMap) => {
         this.investigatorId = params.get('investigator_id');
         this.investigator = this.investigatorService.getInvestigator(this.investigatorId);
       }
     );
+    // If an investigators changed event fires, reload the investigator
+    this.investigatorSub = this.investigatorService.investigatorsChanged.subscribe(
+      _ => {
+        this.investigator = this.investigatorService.getInvestigator(this.investigatorId);
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.investigatorSub.unsubscribe();
   }
 
   updateMentalTrauma(modifier: number) {

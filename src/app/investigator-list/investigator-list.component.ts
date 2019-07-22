@@ -23,11 +23,11 @@ export class InvestigatorListComponent implements OnInit, OnDestroy {
 
   constructor(
     private investigatorService: InvestigatorService,
-    private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.investigators = this.investigatorService.getInvestigators(this.route.snapshot.paramMap.get('campaign_id'));
+    this.investigatorService.setCampaignId(this.route.snapshot.paramMap.get('campaign_id'));
+    this.investigators = this.investigatorService.getInvestigators();
     this.investigatorSub = this.investigatorService.investigatorsChanged.subscribe(
       (investigators: Investigator[]) => {
         this.investigators = investigators;

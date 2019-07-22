@@ -40,6 +40,21 @@ export class DataStorageService {
             );
     }
 
+    updateInvestigator(investigator: Investigator) {
+        const { id, ...things } = investigator;
+        // this.campaignCollection.doc(id).set(things, {merge: true})
+        this.investigatorCollection.doc(id).set(things, { merge: true });
+    }
+
+    createInvestigator(investigator: Investigator) {
+        const { id, ...things } = investigator;
+        this.investigatorCollection.add(things);
+    }
+
+    deleteInvestigator(id: string) {
+        this.investigatorCollection.doc(id).delete();
+    }
+
     // Return all saved campaigns
     loadCampaigns(): Observable<Campaign[]> {
         return (from(this.campaignCollection.valueChanges({ idField: 'id' })) as Observable<Campaign[]>)
