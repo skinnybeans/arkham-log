@@ -16,13 +16,17 @@ const appRoutes: Routes = [
     { path: '', redirectTo: '/campaigns', pathMatch: 'full' },
     { path: 'campaign/:campaign_id',
         component: CampaignPanelComponent,
-        canActivate: [CampaignIdGuard],
+        // canActivate: [CampaignIdGuard],
         children: [
             { path: 'investigators',
                 component: InvestigatorListComponent,
                 children: [
                     { path: '', component: InvestigatorStartComponent, pathMatch: 'full' },
-                    { path: ':investigator_id', component: InvestigatorComponent, canActivate: [InvestigatorIdGuard]}
+                    {
+                        path: ':investigator_id',
+                        component: InvestigatorComponent,
+                        // canActivate: [InvestigatorIdGuard]
+                    }
                 ]
             },
             { path: 'progress', component: CampaignProgressComponent}

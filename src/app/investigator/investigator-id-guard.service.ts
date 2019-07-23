@@ -2,7 +2,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, Activ
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
-import { InvestigatorService } from '../investigator.service';
+import { InvestigatorService } from './investigator.service';
 
 @Injectable({
     providedIn: 'root'
@@ -16,13 +16,14 @@ export class InvestigatorIdGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
     Observable<boolean> | Promise<boolean> | boolean {
 
-        const investigatorCount = this.investigatorService.investigators.length;
+        // const investigatorCount = this.investigatorService.getInvestigators().length;
 
-        if (+route.paramMap.get('investigator_id') < investigatorCount) {
-            return true;
-        }
+        // if (+route.paramMap.get('investigator_id') < investigatorCount) {
+        //     return true;
+        // }
 
-        this.router.navigate(['/campaigns']);
-        return false;
+        // this.router.navigate(['/campaigns']);
+        // return false;
+        return true;
     }
 }

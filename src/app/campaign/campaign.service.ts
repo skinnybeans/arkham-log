@@ -33,8 +33,10 @@ export class CampaignService implements OnDestroy {
         }
     }
 
-    getCampaign(id: number) {
-        return this.campaigns[id];
+    getCampaign(id: string) {
+        return this.campaigns.find( campaign => {
+            return campaign.id === id ? true : false;
+        } );
     }
 
     getCampaigns() {

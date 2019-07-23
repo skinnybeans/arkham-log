@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, RouteReuseStrategy } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Investigator } from '../investigator/investigator.model';
-import { InvestigatorService } from '../investigator.service';
+import { InvestigatorService } from '../investigator/investigator.service';
 
 
 @Component({
@@ -23,11 +23,11 @@ export class InvestigatorListComponent implements OnInit, OnDestroy {
 
   constructor(
     private investigatorService: InvestigatorService,
-    private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.investigators = this.investigatorService.investigators;
+    this.investigatorService.setCampaignId(this.route.snapshot.paramMap.get('campaign_id'));
+    this.investigators = this.investigatorService.getInvestigators();
     this.investigatorSub = this.investigatorService.investigatorsChanged.subscribe(
       (investigators: Investigator[]) => {
         this.investigators = investigators;
@@ -41,7 +41,7 @@ export class InvestigatorListComponent implements OnInit, OnDestroy {
 
   onAddInvestigator() {
     this.investigatorService.addInvestigator();
-    const investigatorIndex = this.investigators.length - 1;
-    this.router.navigate([investigatorIndex], { relativeTo: this.route });
+    // const investigatorIndex = this.investigators.length - 1;
+    // this.router.navigate([investigatorIndex], { relativeTo: this.route });
   }
 }

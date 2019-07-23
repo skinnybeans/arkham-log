@@ -16,7 +16,6 @@ import {
 
 import { Campaign, CampaignType } from '../campaign.model';
 import { CampaignService } from '../campaign.service';
-import { retry } from 'rxjs/operators';
 
 
 
@@ -43,6 +42,9 @@ export class CampaignListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.campaigns = this.campaignService.getCampaigns();
+    if (this.campaigns) {
+      this.loadingCampaigns = false;
+    }
 
     this.campaignSubs.add(this.campaignService.campaignsChanged.subscribe(
       (campaigns: Campaign[]) => {

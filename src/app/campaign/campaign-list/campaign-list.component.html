@@ -7,7 +7,7 @@
     <div *ngFor="let campaign of campaigns; let i = index" class="flex justify-between items-center ma2">
       <div>{{campaign.campaignType}} - {{campaign.name}}</div>
       <div>
-        <button class="btn btn-primary w3 h2 mh1" [routerLink]="['/campaign', i, 'investigators']">Open</button>
+        <button class="btn btn-primary w3 h2 mh1" [routerLink]="['/campaign', campaign.id, 'investigators']">Open</button>
         <button class="btn btn-danger w3 h2 mh1" (click)="onDelete(campaign.id)">Delete</button>
       </div>
     </div>
