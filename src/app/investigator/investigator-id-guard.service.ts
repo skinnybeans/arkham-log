@@ -2,7 +2,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, Activ
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
-import { InvestigatorService } from '../investigator.service';
+import { InvestigatorService } from './investigator.service';
 
 @Injectable({
     providedIn: 'root'

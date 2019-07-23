@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 
-import { Investigator } from './investigator/investigator.model';
-import { DataStorageService } from './common/data-storage.service';
+import { Investigator } from './investigator.model';
+import { DataStorageService } from '../common/data-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +19,6 @@ export class InvestigatorService {
   ) { }
 
   investigatorsChanged = new Subject<Investigator[]>();
-
-  // investigators: Investigator[] = [
-  //   new Investigator('Wendy Adams', 0 , 1, ['nothing of note here is a long note to test line wrapping']),
-  //   new Investigator('Roland Banks', 1 , 1, ['relic of ages'])
-  // ];
 
   setCampaignId(id: string) {
     if (this.campaignId !== id) {
@@ -99,5 +94,9 @@ export class InvestigatorService {
 
   addInvestigator() {
     this.dataStorageService.createInvestigator(new Investigator('new investigator'));
+  }
+
+  updateInvestigator(investigator: Investigator) {
+    this.dataStorageService.updateInvestigator(investigator);
   }
 }

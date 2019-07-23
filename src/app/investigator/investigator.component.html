@@ -1,7 +1,8 @@
 <div class="sans-serif f6 mw6 ma2">
   <div class="flex justify-between items-center">
     <div class="b">Name:</div>
-    <input type="text" class="mv2 h2 ba pa1 b--blue br2 w-75" [(ngModel)]="investigator.name" />
+    <input type="text" class="mv2 h2 ba pa1 b--blue br2 w-50" [(ngModel)]="investigator.name" />
+    <button class="btn btn-primary h2 mh1" (click)="onSaveName()">Update Name</button>
   </div>
   <div class="pv2 flex justify-between items-center">
     <div>Mental trauma: {{ investigator.mentalTrauma }}</div>

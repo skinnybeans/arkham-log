@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, RouteReuseStrategy } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Investigator } from '../investigator/investigator.model';
-import { InvestigatorService } from '../investigator.service';
+import { InvestigatorService } from '../investigator/investigator.service';
 
 
 @Component({

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { Investigator } from './investigator.model';
-import { InvestigatorService } from '../investigator.service';
+import { InvestigatorService } from './investigator.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -64,5 +64,9 @@ export class InvestigatorComponent implements OnInit, OnDestroy {
   onDelete() {
     this.investigatorService.deleteInvestigator(this.investigatorId);
     this.router.navigate(['../'], { relativeTo: this.route });
+  }
+
+  onSaveName() {
+    this.investigatorService.updateInvestigator(this.investigator);
   }
 }
