@@ -17,7 +17,7 @@ export class CampaignNotesComponent implements OnInit, OnDestroy {
   constructor(private campaignProgressService: CampaignProgressService) { }
 
   ngOnInit() {
-    this.notes = this.campaignProgressService.getNotes();
+    // this.notes = this.campaignProgressService.getNotes();
 
     this.notesSub = this.campaignProgressService.notesChanged.subscribe(
       () => {
