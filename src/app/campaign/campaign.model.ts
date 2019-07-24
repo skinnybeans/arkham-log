@@ -1,6 +1,6 @@
 export enum CampaignType {
     nightofzealot = 'Night of the Zealot',
-    dunwitch = 'Dunwitch Legacy',
+    dunwich = 'Dunwich Legacy',
 }
 
 export class Campaign {

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DunwitchProgressComponent } from './dunwitch-progress.component';
+import { DunwichProgressComponent } from './dunwich-progress.component';
 
-describe('DunwitchProgressComponent', () => {
-  let component: DunwitchProgressComponent;
-  let fixture: ComponentFixture<DunwitchProgressComponent>;
+describe('DunwichProgressComponent', () => {
+  let component: DunwichProgressComponent;
+  let fixture: ComponentFixture<DunwichProgressComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DunwitchProgressComponent ]
+      declarations: [ DunwichProgressComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DunwitchProgressComponent);
+    fixture = TestBed.createComponent(DunwichProgressComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
