@@ -1,9 +1,11 @@
 <div>
-  <div class="center mv2">
-    Campaign name: 
-    <!-- <input type="text" class="h2 b--blue br2 ba w-60" [(ngModel)]="campaignName"></div> -->
-    <input type="text" class="h2 b--blue br2 ba w-60" [(ngModel)]="campaign.name"></div>
+  <div *ngIf="!loadingCampaign">
+    <div class="center mv2">
+      Campaign name: 
+      <input type="text" class="h2 b--blue br2 ba w-60" [(ngModel)]="campaign.name">
+    </div>
     <p>Campaign type: {{campaign.campaignType}}</p>
+  </div>
   <div class="sans-serif w-100 ba br2">
     <div class="f5 bb bw1 b--black-10 flex">
         <a

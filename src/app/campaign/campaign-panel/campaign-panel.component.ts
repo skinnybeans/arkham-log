@@ -3,16 +3,19 @@ import { Component, OnInit } from '@angular/core';
 
 import { CampaignService } from '../campaign.service';
 import { Campaign } from '../campaign.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-campaign-panel',
   templateUrl: './campaign-panel.component.html',
-  styleUrls: ['./campaign-panel.component.css']
+  styleUrls: ['./campaign-panel.component.css'],
 })
 export class CampaignPanelComponent implements OnInit {
 
   campaign: Campaign;
-  campaignName: string;
+  campaignId: string;
+  campaignSub: Subscription;
+  loadingCampaign = true;
   isInvestigatorsVisible = true;
   isProgressVisible = false;
 
@@ -26,8 +29,17 @@ export class CampaignPanelComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(
       (params: ParamMap) => {
-        this.campaign = this.campaignService.getCampaign(params.get('campaign_id'));
-        this.campaignName = this.campaign.name;
+        this.campaignId = params.get('campaign_id');
+        this.campaign = this.campaignService.getCampaign(this.campaignId);
+        this.campaign ? this.loadingCampaign = false : this.loadingCampaign = true;
+      }
+    );
+
+    this.campaignSub = this.campaignService.campaignsChanged.subscribe(
+      _ => {
+        this.campaign = this.campaignService.getCampaign(this.campaignId);
+        console.log(this.campaign);
+        this.campaign ? this.loadingCampaign = false : this.loadingCampaign = true;
       }
     );
   }

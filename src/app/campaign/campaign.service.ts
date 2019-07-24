@@ -34,6 +34,7 @@ export class CampaignService implements OnDestroy {
     }
 
     getCampaign(id: string) {
+
         return this.campaigns.find( campaign => {
             return campaign.id === id ? true : false;
         } );
@@ -45,6 +46,7 @@ export class CampaignService implements OnDestroy {
                 (campaigns: Campaign[]) => {
                     this.campaigns = campaigns;
                     this.campaignsChanged.next(this.campaigns.slice());
+                    return this.campaigns.slice();
                 }
             );
         } else {

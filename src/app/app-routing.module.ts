@@ -9,6 +9,7 @@ import { InvestigatorComponent } from './investigator/investigator.component';
 import { InvestigatorIdGuard } from './investigator/investigator-id-guard.service';
 import { CampaignIdGuard } from './campaign/campaign-id-guard.service';
 import { InvestigatorStartComponent } from './investigator/investigator-start/investigator-start.component';
+import { CampaignResolverService } from './campaign/campaign-resolver.service';
 
 
 const appRoutes: Routes = [
@@ -16,6 +17,7 @@ const appRoutes: Routes = [
     { path: '', redirectTo: '/campaigns', pathMatch: 'full' },
     { path: 'campaign/:campaign_id',
         component: CampaignPanelComponent,
+        resolve: [CampaignResolverService],
         // canActivate: [CampaignIdGuard],
         children: [
             { path: 'investigators',
