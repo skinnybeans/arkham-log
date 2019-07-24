@@ -18,7 +18,7 @@ import { HeaderComponent } from './header/header.component';
 import { CampaignListComponent } from './campaign/campaign-list/campaign-list.component';
 import { AppRoutingModule } from './app-routing.module';
 import { InvestigatorStartComponent } from './investigator/investigator-start/investigator-start.component';
-import { DunwitchProgressComponent } from './campaign/campaign-progress/dunwitch-progress/dunwitch-progress.component';
+import { DunwichProgressComponent } from './campaign/campaign-progress/dunwich-progress/dunwich-progress.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,7 @@ import { DunwitchProgressComponent } from './campaign/campaign-progress/dunwitch
     HeaderComponent,
     CampaignListComponent,
     InvestigatorStartComponent,
-    DunwitchProgressComponent
+    DunwichProgressComponent
   ],
   imports: [
     BrowserModule,
