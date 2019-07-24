@@ -38,7 +38,6 @@ export class CampaignPanelComponent implements OnInit {
     this.campaignSub = this.campaignService.campaignsChanged.subscribe(
       _ => {
         this.campaign = this.campaignService.getCampaign(this.campaignId);
-        console.log(this.campaign);
         this.campaign ? this.loadingCampaign = false : this.loadingCampaign = true;
       }
     );
