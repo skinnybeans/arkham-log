@@ -34,10 +34,13 @@ export class CampaignService implements OnDestroy {
     }
 
     getCampaign(id: string) {
+        if (this.campaigns) {
+            return this.campaigns.find(campaign => {
+                return campaign.id === id ? true : false;
+            });
+        }
 
-        return this.campaigns.find( campaign => {
-            return campaign.id === id ? true : false;
-        } );
+        return null;
     }
 
     getCampaigns() {

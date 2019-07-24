@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { CampaignService } from '../campaign.service';
 import { Campaign } from '../campaign.model';
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './campaign-panel.component.html',
   styleUrls: ['./campaign-panel.component.css'],
 })
-export class CampaignPanelComponent implements OnInit {
+export class CampaignPanelComponent implements OnInit, OnDestroy {
 
   campaign: Campaign;
   campaignId: string;
@@ -41,5 +41,9 @@ export class CampaignPanelComponent implements OnInit {
         this.campaign ? this.loadingCampaign = false : this.loadingCampaign = true;
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.campaignSub.unsubscribe();
   }
 }
