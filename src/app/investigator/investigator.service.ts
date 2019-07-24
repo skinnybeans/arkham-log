@@ -33,7 +33,6 @@ export class InvestigatorService {
       this.investigatorSub = this.dataStorageService.loadInvestigators(this.campaignId).subscribe(
         (investigators: Investigator[]) => {
           this.investigators = investigators;
-          console.log(investigators);
           this.investigatorsChanged.next(this.investigators.slice());
         }
       );
@@ -43,12 +42,14 @@ export class InvestigatorService {
   }
 
   getInvestigator(id: string) {
-    if (!this.investigators) {
-      this.getInvestigators();
+
+    if (this.investigators) {
+      return this.investigators.find(investigator => {
+        return investigator.id === id ? true : false;
+      });
     }
-    return this.investigators.find( investigator => {
-      return investigator.id === id ? true : false;
-    });
+
+    return null;
   }
 
   updateMentalTrauma(investigatorId: string, modifier: number) {
