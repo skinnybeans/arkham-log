@@ -15,6 +15,7 @@ export class InvestigatorComponent implements OnInit, OnDestroy {
   investigator: Investigator;
   investigatorId: string;
   investigatorSub: Subscription;
+  loadingInvestigator = true;
 
   newNote = '';
 
@@ -28,14 +29,17 @@ export class InvestigatorComponent implements OnInit, OnDestroy {
     // If the route changes make sure to load a new investigator
     this.route.paramMap.subscribe(
       (params: ParamMap) => {
+        this.loadingInvestigator = true;
         this.investigatorId = params.get('investigator_id');
         this.investigator = this.investigatorService.getInvestigator(this.investigatorId);
+        this.loadingInvestigator = this.investigator ? false : true;
       }
     );
     // If an investigators changed event fires, reload the investigator
     this.investigatorSub = this.investigatorService.investigatorsChanged.subscribe(
       _ => {
         this.investigator = this.investigatorService.getInvestigator(this.investigatorId);
+        this.loadingInvestigator = false;
       }
     );
   }
