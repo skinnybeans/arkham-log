@@ -1,8 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
-import { CampaignProgressService } from './campaign-progress.service';
-import { ZealotProgressService } from './zealot-progress/zealot-progress.service';
 import { CampaignService } from '../campaign.service';
 import { Campaign, CampaignType } from '../campaign.model';
 import { Subscription } from 'rxjs';
@@ -10,8 +8,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-campaign-progress',
   templateUrl: './campaign-progress.component.html',
-  styleUrls: ['./campaign-progress.component.css'],
-  providers: [CampaignProgressService, ZealotProgressService]
+  styleUrls: ['./campaign-progress.component.css']
 })
 export class CampaignProgressComponent implements OnInit, OnDestroy {
 

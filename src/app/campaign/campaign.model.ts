@@ -6,7 +6,7 @@ export enum CampaignType {
 }
 
 export class CampaignProgress {
-    notes: string [] = ['test note'];
+    notes: string [] = [];
     missions: Mission[];
     other: any; // store any campaign specific data
 }

@@ -14,14 +14,16 @@ export class CampaignNotesComponent implements OnInit, OnDestroy {
   notes: string[] = [];
   notesSub: Subscription;
 
-  constructor(private campaignProgressService: CampaignProgressService) { }
+  constructor(
+    private campaignProgressService: CampaignProgressService
+  ) { }
 
   ngOnInit() {
-    // this.notes = this.campaignProgressService.getNotes();
+    this.notes = this.campaignProgressService.getNotes();
 
     this.notesSub = this.campaignProgressService.notesChanged.subscribe(
-      () => {
-        this.notes = this.campaignProgressService.getNotes();
+      (notes: string[]) => {
+        this.notes = notes;
       }
     );
   }
