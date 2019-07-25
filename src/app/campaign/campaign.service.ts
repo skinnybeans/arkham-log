@@ -64,4 +64,8 @@ export class CampaignService implements OnDestroy {
     deleteCampaign(id: string) {
         return this.dataStorageService.deleteCampaign(id);
     }
+
+    updateCampaign(campaign: Campaign) {
+        return this.dataStorageService.updateCampaign(campaign);
+    }
 }
