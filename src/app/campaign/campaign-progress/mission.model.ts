@@ -11,7 +11,7 @@ export class Mission {
 export class MissionFactory {
     public static createMissions(campaignType: CampaignType) {
 
-        switch(campaignType) {
+        switch (campaignType) {
             case CampaignType.nightofzealot:
                 return [
                     new Mission('The Gathering'),

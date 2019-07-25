@@ -122,9 +122,6 @@ export class DataStorageService {
         // Don't save an ID, let firebase assign one
         const { id, ...things} = campaign;
 
-        // Firebase needs the typescript objects to be destructured otherwise it sees it as a
-        // custom type and can't save it
-        things.progress = {...things.progress};
         return from(this.campaignCollection.add(this.convertObject(things)))
             .pipe(
                 catchError(
