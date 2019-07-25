@@ -16,9 +16,9 @@ export class CampaignProgressService {
 
     // private notes: string[] = ['some note about the campaign so far...', 'and another note'];
     private missions: Mission[] = [
-        {name: 'mission 2', completed: false, experience: 0, sequence: 2},
-        {name: 'mission 1', completed: true, experience: 0, sequence: 1},
-        {name: 'mission 3', completed: false, experience: 0, sequence: 3},
+        new Mission('mission 1'),
+        new Mission('mission 2'),
+        new Mission('mission 3'),
     ];
 
     constructor(

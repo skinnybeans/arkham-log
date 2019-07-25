@@ -42,13 +42,12 @@ export class DataStorageService {
 
     updateInvestigator(investigator: Investigator) {
         const { id, ...things } = investigator;
-        // this.campaignCollection.doc(id).set(things, {merge: true})
-        this.investigatorCollection.doc(id).set(things, { merge: true });
+        this.investigatorCollection.doc(id).set(this.convertObject(things), { merge: true });
     }
 
     createInvestigator(investigator: Investigator) {
         const { id, ...things } = investigator;
-        this.investigatorCollection.add(things);
+        this.investigatorCollection.add(this.convertObject(things));
     }
 
     deleteInvestigator(id: string) {
@@ -89,7 +88,7 @@ export class DataStorageService {
 
     updateCampaign(campaign: Campaign) {
         const { id, ...things } = campaign;
-        return from(this.campaignCollection.doc(id).set(things, {merge: true}))
+        return from(this.campaignCollection.doc(id).set(this.convertObject(things), {merge: true}))
             .pipe(
                 catchError(
                     (error) => {
@@ -126,7 +125,7 @@ export class DataStorageService {
         // Firebase needs the typescript objects to be destructured otherwise it sees it as a
         // custom type and can't save it
         things.progress = {...things.progress};
-        return from(this.campaignCollection.add(things))
+        return from(this.campaignCollection.add(this.convertObject(things)))
             .pipe(
                 catchError(
                     (error) => {
@@ -183,5 +182,10 @@ export class DataStorageService {
                 this.logService.LogEvent(logEvent);
             })
         );
+    }
+
+    // convert to a pure javascript object so firebase doesn't complain
+    private convertObject(object: any): any {
+        return JSON.parse(JSON.stringify(object));
     }
 }
