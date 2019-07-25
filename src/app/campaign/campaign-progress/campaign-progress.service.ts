@@ -12,14 +12,15 @@ export class CampaignProgressService {
     private campaignId: string = null;
     private campaign: Campaign = null;
 
-    notesChanged = new Subject();  // trigger event when the notes are changed.
+    notesChanged = new Subject();
+    missionsChanged = new Subject();
 
     // private notes: string[] = ['some note about the campaign so far...', 'and another note'];
-    private missions: Mission[] = [
-        new Mission('mission 1'),
-        new Mission('mission 2'),
-        new Mission('mission 3'),
-    ];
+    // private missions: Mission[] = [
+    //     new Mission('mission 1'),
+    //     new Mission('mission 2'),
+    //     new Mission('mission 3'),
+    // ];
 
     constructor(
         private campaignService: CampaignService
@@ -38,6 +39,9 @@ export class CampaignProgressService {
                     if (!this.campaign.progress) {
                         this.campaign.progress = new CampaignProgress();
                     }
+
+                    // could add logic here to check if the notes/missions have actually
+                    // changed and not some other part of the campaign data.
                     this.notesChanged.next(this.campaign.progress.notes.slice());
                 }
             }
@@ -66,14 +70,16 @@ export class CampaignProgressService {
     }
 
     getMissions() {
-        return this.missions.slice();
+        return this.campaign.progress.missions.slice();
     }
 
     updateMissionProgress(id: number, isCompleted: boolean) {
-        this.missions[id].completed = isCompleted;
+        this.campaign.progress.missions[id].completed = isCompleted;
+        this.campaignService.updateCampaign(this.campaign);
     }
 
     updateMissionExperience(id: number, experience: number) {
-        this.missions[id].experience = experience;
+        this.campaign.progress.missions[id].experience = experience;
+        this.campaignService.updateCampaign(this.campaign);
     }
 }
