@@ -1,6 +1,5 @@
 import { Subject } from 'rxjs';
 
-import { Mission } from './mission.model';
 import { CampaignService } from '../campaign.service';
 import { Campaign, CampaignProgress } from '../campaign.model';
 import { Injectable } from '@angular/core';
@@ -15,21 +14,9 @@ export class CampaignProgressService {
     notesChanged = new Subject();
     missionsChanged = new Subject();
 
-    // private notes: string[] = ['some note about the campaign so far...', 'and another note'];
-    // private missions: Mission[] = [
-    //     new Mission('mission 1'),
-    //     new Mission('mission 2'),
-    //     new Mission('mission 3'),
-    // ];
-
     constructor(
         private campaignService: CampaignService
     ) {
-        // Sort the mission array here for now, will need to move later
-        // this.missions.sort((a: Mission, b: Mission) => {
-        //     return a.sequence - b.sequence;
-        // });
-
         // subscribe to the campaign service to see if the campaign changes at all
         this.campaignService.campaignsChanged.subscribe(
             _ => {
