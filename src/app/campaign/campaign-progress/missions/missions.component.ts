@@ -18,8 +18,11 @@ export class MissionsComponent implements OnInit {
     this.missions = this.campaignProgressService.getMissions();
   }
 
-  onStatusChanged(id: number, event: MouseEvent) {
-    const element = event.target as HTMLInputElement;
-    this.campaignProgressService.updateMissionProgress(id, element.checked);
+  onStatusChanged(id: number, complete: boolean) {
+    this.campaignProgressService.updateMissionProgress(id, complete);
+  }
+
+  onExperienceChanged(id: number, value: string) {
+    this.campaignProgressService.updateMissionExperience(id, +value);
   }
 }

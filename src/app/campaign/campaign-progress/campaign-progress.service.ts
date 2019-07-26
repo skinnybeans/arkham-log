@@ -1,6 +1,5 @@
 import { Subject } from 'rxjs';
 
-import { Mission } from './mission.model';
 import { CampaignService } from '../campaign.service';
 import { Campaign, CampaignProgress } from '../campaign.model';
 import { Injectable } from '@angular/core';
@@ -12,23 +11,12 @@ export class CampaignProgressService {
     private campaignId: string = null;
     private campaign: Campaign = null;
 
-    notesChanged = new Subject();  // trigger event when the notes are changed.
-
-    // private notes: string[] = ['some note about the campaign so far...', 'and another note'];
-    private missions: Mission[] = [
-        {name: 'mission 2', completed: false, experience: 0, sequence: 2},
-        {name: 'mission 1', completed: true, experience: 0, sequence: 1},
-        {name: 'mission 3', completed: false, experience: 0, sequence: 3},
-    ];
+    notesChanged = new Subject();
+    missionsChanged = new Subject();
 
     constructor(
         private campaignService: CampaignService
     ) {
-        // Sort the mission array here for now, will need to move later
-        // this.missions.sort((a: Mission, b: Mission) => {
-        //     return a.sequence - b.sequence;
-        // });
-
         // subscribe to the campaign service to see if the campaign changes at all
         this.campaignService.campaignsChanged.subscribe(
             _ => {
@@ -38,6 +26,9 @@ export class CampaignProgressService {
                     if (!this.campaign.progress) {
                         this.campaign.progress = new CampaignProgress();
                     }
+
+                    // could add logic here to check if the notes/missions have actually
+                    // changed and not some other part of the campaign data.
                     this.notesChanged.next(this.campaign.progress.notes.slice());
                 }
             }
@@ -66,14 +57,16 @@ export class CampaignProgressService {
     }
 
     getMissions() {
-        return this.missions.slice();
+        return this.campaign.progress.missions.slice();
     }
 
     updateMissionProgress(id: number, isCompleted: boolean) {
-        this.missions[id].completed = isCompleted;
+        this.campaign.progress.missions[id].completed = isCompleted;
+        this.campaignService.updateCampaign(this.campaign);
     }
 
     updateMissionExperience(id: number, experience: number) {
-        this.missions[id].experience = experience;
+        this.campaign.progress.missions[id].experience = experience;
+        this.campaignService.updateCampaign(this.campaign);
     }
 }
