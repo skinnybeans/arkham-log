@@ -9,8 +9,8 @@
           </tr>
           <tr class="striped--near-white" *ngFor="let mission of missions; let i = index">
             <td class="pv2 ph3">{{ mission.name }}</td>
-            <td class="pv2 ph3 tc"><input type="checkbox" [checked]="mission.completed" (click)="onStatusChanged(i, $event)" /></td>
-            <td class="pv2 ph3 tc"><input type="text" class="w2 tc" value="{{ mission.experience }}"></td>
+            <td class="pv2 ph3 tc"><input type="checkbox" [checked]="mission.completed" #complete (click)="onStatusChanged(i, complete.checked)" /></td>
+            <td class="pv2 ph3 tc"><input type="text" class="w2 tc" value="{{ mission.experience }}" #exp (input)="onExperienceChanged(i, exp.value)"></td>
           </tr>
         </table>
       </div>
