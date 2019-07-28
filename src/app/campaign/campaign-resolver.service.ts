@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Campaign } from './campaign.model';
 import { CampaignService } from './campaign.service';
 import { CampaignProgressService } from './campaign-progress/campaign-progress.service';
+import { ZealotProgressService } from './campaign-progress/zealot-progress/zealot-progress.service';
 
 
 @Injectable({
@@ -14,7 +15,8 @@ export class CampaignResolverService implements Resolve<Campaign[]> {
 
     constructor(
         private campaignService: CampaignService,
-        private campaignProgressService: CampaignProgressService
+        private campaignProgressService: CampaignProgressService,
+        private zealotProgressService: ZealotProgressService,
     ) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
@@ -22,6 +24,7 @@ export class CampaignResolverService implements Resolve<Campaign[]> {
 
         const campaignId = route.paramMap.get('campaign_id');
         this.campaignProgressService.setCampaignId(campaignId);
+        this.zealotProgressService.setCampaignId(campaignId);
         return this.campaignService.getCampaigns();
     }
 
