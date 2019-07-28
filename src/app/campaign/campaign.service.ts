@@ -11,7 +11,7 @@ import {
 
 import { Campaign } from './campaign.model';
 import { DataStorageService } from '../common/data-storage.service';
-import { MissionFactory } from './campaign-progress/mission.model';
+import { MissionFactory, OtherProgressFactory } from './campaign-progress/progress-factory';
 
 
 
@@ -60,6 +60,7 @@ export class CampaignService implements OnDestroy {
 
     addCampaign(campaign: Campaign) {
         campaign.progress.missions = MissionFactory.createMissions(campaign.campaignType);
+        campaign.progress.other = OtherProgressFactory.createOtherProgress(campaign.campaignType);
         return this.dataStorageService.createCampaign(campaign);
     }
 
