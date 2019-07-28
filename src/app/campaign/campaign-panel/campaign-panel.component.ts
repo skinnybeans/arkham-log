@@ -33,9 +33,6 @@ export class CampaignPanelComponent implements OnInit, OnDestroy {
       (params: ParamMap) => {
         this.campaignId = params.get('campaign_id');
         this.campaign = this.campaignService.getCampaign(this.campaignId);
-        // TODO: change this so the progress service reads it from the campaign service
-        // or selected campaign is an observable that services subscribe to
-        this.campaignProgressService.setCampaignId(this.campaignId);
         this.campaign ? this.loadingCampaign = false : this.loadingCampaign = true;
       }
     );
