@@ -11,7 +11,7 @@ import { Campaign } from '../../campaign.model';
 export class ZealotProgressService {
     private campaignId: string;
     private campaign: Campaign;
-    private cultists = new ZealotProgress(['William Blake']);
+    private cultists: ZealotProgress = null;
 
     interrogatedChanged = new Subject();
     escapedChanged = new Subject();
@@ -28,7 +28,6 @@ export class ZealotProgressService {
                     if (!this.campaign.progress.other) {
                         this.campaign.progress.other = new ZealotProgress();
                     }
-                    console.log(this.campaign);
 
                     // could add logic here to check if the notes/missions have actually
                     // changed and not some other part of the campaign data.
@@ -58,21 +57,29 @@ export class ZealotProgressService {
 
     addInterrogatedCultist(name: string) {
         this.cultists.interrogated.push(name);
-        this.interrogatedChanged.next(this.cultists.interrogated.slice());
+        this.campaign.progress.other = this.cultists;
+        this.campaignService.updateCampaign(this.campaign);
+        // this.interrogatedChanged.next(this.cultists.interrogated.slice());
     }
 
     removeInterrogatedCultist(id: number) {
         this.cultists.interrogated.splice(id, 1);
-        this.interrogatedChanged.next(this.cultists.interrogated.slice());
+        this.campaign.progress.other = this.cultists;
+        this.campaignService.updateCampaign(this.campaign);
+        // this.interrogatedChanged.next(this.cultists.interrogated.slice());
     }
 
     addEscapedCultist(name: string) {
         this.cultists.escaped.push(name);
-        this.escapedChanged.next(this.cultists.escaped.slice());
+        this.campaign.progress.other = this.cultists;
+        this.campaignService.updateCampaign(this.campaign);
+        // this.escapedChanged.next(this.cultists.escaped.slice());
     }
 
     removeEscapedCultist(id: number) {
         this.cultists.escaped.splice(id, 1);
-        this.escapedChanged.next(this.cultists.escaped.slice());
+        this.campaign.progress.other = this.cultists;
+        this.campaignService.updateCampaign(this.campaign);
+        // this.escapedChanged.next(this.cultists.escaped.slice());
     }
 }
