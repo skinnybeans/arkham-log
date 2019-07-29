@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { ZealotProgress } from './zealot-progress.model';
 import { CampaignService } from '../../campaign.service';
-import { Campaign } from '../../campaign.model';
+import { Campaign, CampaignType } from '../../campaign.model';
 
 @Injectable({
     providedIn: 'root'
@@ -24,13 +24,16 @@ export class ZealotProgressService {
             _ => {
                 if (this.campaignId) {
                     this.campaign = this.campaignService.getCampaign(this.campaignId);
+
+                    if (this.campaign.campaignType !== CampaignType.nightofzealot) {
+                        return;
+                    }
+
                     // cater for campaigns that don't have progress added yet
                     if (!this.campaign.progress.other) {
                         this.campaign.progress.other = new ZealotProgress();
                     }
 
-                    // could add logic here to check if the notes/missions have actually
-                    // changed and not some other part of the campaign data.
                     this.cultists = (this.campaign.progress.other as ZealotProgress);
 
                     this.interrogatedChanged.next(this.cultists.interrogated.slice());
@@ -44,15 +47,22 @@ export class ZealotProgressService {
         if (this.campaignId !== id) {
             this.campaignId = id;
             this.campaign = this.campaignService.getCampaign(this.campaignId);
+
+            if (this.campaign && this.campaign.campaignType === CampaignType.nightofzealot) {
+                this.cultists = (this.campaign.progress.other as ZealotProgress);
+
+                this.interrogatedChanged.next(this.cultists.interrogated.slice());
+                this.escapedChanged.next(this.cultists.escaped.slice());
+            }
         }
     }
 
     getInterrogatedCultists() {
-        return this.cultists.interrogated.slice();
+        return this.cultists ? this.cultists.interrogated.slice() : [];
     }
 
     getEscapedCultists() {
-        return this.cultists.escaped.slice();
+        return this.cultists ? this.cultists.escaped.slice() : [];
     }
 
     addInterrogatedCultist(name: string) {

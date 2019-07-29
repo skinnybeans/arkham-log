@@ -1,6 +1,7 @@
 import { CampaignType } from '../campaign.model';
 import { Mission } from '../campaign-progress/mission.model';
 import { ZealotProgress } from './zealot-progress/zealot-progress.model';
+import { DunwichProgress } from './dunwich-progress/dunwich-progress.model';
 
 export class MissionFactory {
     public static createMissions(campaignType: CampaignType) {
@@ -33,8 +34,7 @@ export class OtherProgressFactory {
             case CampaignType.nightofzealot:
                 return new ZealotProgress();
             case CampaignType.dunwich:
-                console.log('No dunwich progress yet..');
-                break;
+                return new DunwichProgress();
         }
     }
 }

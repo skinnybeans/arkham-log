@@ -8,19 +8,21 @@
         [(ngModel)]="sacrificed">
       <button 
         class="btn btn-success h2 w3"
-        [disabled]="sacrificed === ''">Add</button>
+        [disabled]="sacrificed === ''"
+        (click)="onAdd()">Add</button>
     </div>
   </div>
   
   <ul class="list ml0 pl0">
   <li 
-    *ngFor="let cultist of sacrificedList; let i = index">
+    *ngFor="let sacrificed of sacrificedList; let i = index">
     <div 
       class="flex justify-between items-center pv1 pl1"
       [ngClass]="{'bg-near-white': i % 2}">
-      <div class="w-80">{{cultist}}</div>
+      <div class="w-80">{{sacrificed}}</div>
       <button
-        class="btn btn-danger w2 h2">-</button>
+        class="btn btn-danger w2 h2"
+        (click)="onDelete(i)">-</button>
     </div>
   </li>
   </ul>
